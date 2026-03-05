@@ -91,12 +91,41 @@ Review and harden these rules before production launch.
 
 ## Subscription Emails
 
-The app stores post subscriptions in Firestore. Sending emails is optional and not hard-coded in the frontend.
+The app stores post subscriptions in Firestore and now includes a backend trigger scaffold for email delivery.
 
-Recommended production approach:
+Implemented pieces in this repo:
 
-1. Install Firebase Extension `firestore-send-email`.
-2. Trigger email writes to a `mail` collection from a backend function when new replies are created.
+- Cloud Function trigger: `functions/src/index.ts`.
+- Trigger event: new reply in `posts/{postId}/replies/{replyId}`.
+- Behavior: resolve subscribed user emails and queue a mail document in `mail/{reply_postId_replyId}`.
+- Delivery handoff: Firebase Trigger Email extension reads queued docs from `mail`.
+
+Setup steps to enable delivery:
+
+1. Install function dependencies.
+
+```bash
+npm --prefix functions ci
+```
+
+2. Build and deploy functions.
+
+```bash
+npm --prefix functions run build
+firebase deploy --only functions --project projects-forum-6355a
+```
+
+3. Install Firebase extension `firebase/firestore-send-email` for the same project.
+
+```bash
+firebase ext:install firebase/firestore-send-email --project projects-forum-6355a
+```
+
+4. During extension install, set the monitored collection to `mail` and provide SMTP credentials.
+
+Security note:
+
+- Keep client write access to `mail` disabled. The included function uses Admin SDK writes, which bypass client security rules.
 
 ## Scripts
 
@@ -106,6 +135,15 @@ Recommended production approach:
 - `npm run format:check` - Prettier check.
 - `npm run format` - Prettier write.
 - `npm run test:ci` - one-shot unit tests.
+
+## What You Need To Replace
+
+Before production, replace these placeholders/config values with your own:
+
+1. `.env` Firebase web config values (`FIREBASE_*`).
+2. Firebase CLI project target if not using `projects-forum-6355a`.
+3. Trigger Email extension SMTP credentials and default sender/reply-to.
+4. Optional forum URL in email templates/content if you want absolute links instead of `/post/{postId}`.
 
 ## CI and Deployment
 

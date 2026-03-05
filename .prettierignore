@@ -2,6 +2,7 @@ node_modules
 dist
 coverage
 .angular/cache
+functions/lib
 package-lock.json
 .vscode
 .github/agents
