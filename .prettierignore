@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+.angular/cache
+package-lock.json
+.vscode
+.github/agents
+.github/instructions
+.github/prompts
+.github/copilot-instructions.md

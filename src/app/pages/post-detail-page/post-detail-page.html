@@ -1,0 +1,64 @@
+<section class="post-detail-page">
+  <a routerLink="/" class="back-link">← {{ 'postDetail.back' | translate }}</a>
+
+  @if (actionError()) {
+    <p class="error">{{ actionError() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="status">{{ 'postDetail.loading' | translate }}</p>
+  } @else if (!post()) {
+    <p class="status">{{ 'postDetail.unavailable' | translate }}</p>
+  } @else {
+    <article class="post-card">
+      <header>
+        <div>
+          <p class="type">
+            {{
+              (post()!.type === 'issue' ? 'postForm.typeIssue' : 'postForm.typeQuestion')
+                | translate
+            }}
+          </p>
+          <h1>{{ post()!.title }}</h1>
+        </div>
+        <p class="date">{{ post()!.createdAt | date: 'medium' }}</p>
+      </header>
+
+      <p class="project">{{ 'postDetail.project' | translate }}: {{ post()!.projectName }}</p>
+      <p class="message">{{ post()!.message }}</p>
+
+      <div class="tags">
+        @for (tag of post()!.tags; track tag) {
+          <span>#{{ tag }}</span>
+        }
+      </div>
+
+      <div class="meta-row">
+        <span>{{ 'postDetail.likes' | translate: { count: post()!.likesCount } }}</span>
+        <span>{{ 'postDetail.replies' | translate: { count: post()!.repliesCount } }}</span>
+        <span>{{ 'postDetail.subscribers' | translate: { count: post()!.subscribersCount } }}</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" (click)="toggleVote()" [disabled]="!isAuthenticated()">
+          {{ (isLiked() ? 'postDetail.unlike' : 'postDetail.like') | translate }}
+        </button>
+        <button
+          type="button"
+          (click)="toggleSubscription()"
+          [disabled]="!isAuthenticated() || subscriptionPending()"
+        >
+          {{ (isSubscribed() ? 'postDetail.unsubscribe' : 'postDetail.subscribe') | translate }}
+        </button>
+      </div>
+    </article>
+
+    <app-reply-form
+      [enabled]="isAuthenticated()"
+      [pending]="replyPending()"
+      (submitReply)="submitReply($event)"
+    />
+
+    <app-reply-list [replies]="replies()" />
+  }
+</section>

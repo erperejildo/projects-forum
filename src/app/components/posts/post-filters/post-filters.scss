@@ -1,0 +1,76 @@
+.filters-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.filters-card h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-family: var(--font-heading);
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.88rem;
+}
+
+.field input,
+.field select {
+  border-radius: 0.7rem;
+  border: 1px solid var(--border-color);
+  padding: 0.55rem 0.65rem;
+  font: inherit;
+  background: #fff;
+}
+
+.tag-group {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.group-title {
+  font-size: 0.88rem;
+}
+
+.helper {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.tag-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag {
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: #fff;
+  color: var(--text-primary);
+  font: inherit;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+
+.tag.active {
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  color: #fff;
+}
+
+.clear-button {
+  border-radius: 999px;
+  border: 1px dashed var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+}

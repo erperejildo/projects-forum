@@ -1,0 +1,53 @@
+.reply-form {
+  display: grid;
+  gap: 0.55rem;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 0.9rem;
+  padding: 0.85rem;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+label > span {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+textarea {
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  font: inherit;
+  padding: 0.6rem 0.65rem;
+}
+
+button {
+  justify-self: end;
+  border: none;
+  border-radius: 0.75rem;
+  background: var(--accent-color);
+  color: var(--accent-contrast);
+  font: inherit;
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.error {
+  margin: 0;
+  color: #a5103a;
+  font-size: 0.78rem;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}

@@ -1,0 +1,17 @@
+<section class="reply-list">
+  <h3>{{ 'replyList.title' | translate }}</h3>
+
+  @if (replies().length === 0) {
+    <p class="empty">{{ 'replyList.empty' | translate }}</p>
+  } @else {
+    @for (reply of replies(); track reply.id) {
+      <article class="reply-card">
+        <header>
+          <strong>{{ reply.authorDisplayName || ('replyList.unknownUser' | translate) }}</strong>
+          <span>{{ formatDate(reply.createdAt) }}</span>
+        </header>
+        <p>{{ reply.message }}</p>
+      </article>
+    }
+  }
+</section>

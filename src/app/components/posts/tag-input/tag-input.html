@@ -1,0 +1,21 @@
+<div class="tag-input-wrapper">
+  <div class="tag-list">
+    @for (tag of tags(); track tag) {
+      <button type="button" class="tag-chip" (click)="removeTag(tag)">#{{ tag }} ×</button>
+    }
+  </div>
+
+  <div class="entry-row">
+    <input
+      type="text"
+      [value]="draft()"
+      (input)="onDraftChange($any($event.target).value)"
+      (keydown)="onEnterKey($event)"
+      [placeholder]="'tagInput.placeholder' | translate"
+    />
+    <button type="button" class="add-button" (click)="addTag()">
+      {{ 'tagInput.add' | translate }}
+    </button>
+  </div>
+  <p class="hint">{{ 'tagInput.hint' | translate }}</p>
+</div>

@@ -1,0 +1,34 @@
+<section class="home-page">
+  <header class="page-header">
+    <h1>{{ 'home.title' | translate }}</h1>
+    <p>{{ 'home.subtitle' | translate }}</p>
+  </header>
+
+  <div class="layout-grid">
+    <app-post-filters
+      [projects]="projects()"
+      [popularTags]="topTags()"
+      [filters]="filters()"
+      [order]="order()"
+      (filtersChange)="onFiltersChange($event)"
+      (orderChange)="onOrderChange($event)"
+    />
+
+    <section class="feed-area">
+      @if (actionError()) {
+        <p class="error">{{ actionError() }}</p>
+      }
+
+      @if (loadingPosts()) {
+        <p class="status">{{ 'home.loadingPosts' | translate }}</p>
+      } @else {
+        <app-post-list
+          [posts]="visiblePosts()"
+          [voteState]="voteState()"
+          (openPost)="openPost($event)"
+          (toggleVote)="toggleVote($event)"
+        />
+      }
+    </section>
+  </div>
+</section>
