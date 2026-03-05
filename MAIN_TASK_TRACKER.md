@@ -9,7 +9,7 @@ This file tracks what is still pending from the original project prompt. Complet
 - [x] Implement subscription email delivery for post updates using Firebase backend tooling.
 - [x] Document exact setup steps for email delivery and what IDs/secrets must be replaced.
 - [x] Run full quality gates again after changes (`format`, `lint`, `test:ci`, `build`).
-- [ ] Open, merge, and clean up a PR for these remaining tasks.
+- [x] Open, merge, and clean up a PR for these remaining tasks.
 
 ## Working Notes
 
@@ -17,3 +17,4 @@ This file tracks what is still pending from the original project prompt. Complet
 - App already supports subscribe/unsubscribe persistence in Firestore.
 - Email queue trigger now exists in `functions/src/index.ts` and writes to `mail` for Trigger Email extension delivery.
 - Validation run completed successfully on 2026-03-05 (`format`, `lint`, `test:ci`, `build`).
+- Remaining-scope implementation PR merged: `#2`.
