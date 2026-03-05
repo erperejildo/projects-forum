@@ -1,59 +1,149 @@
-# ForumApp
+# Projects Forum
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.1.
+Projects Forum is an Angular + Firebase discussion platform where users can read posts publicly and authenticate to create posts, vote, reply, and subscribe to updates.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Public read access for posts, filters, and details.
+- Firebase Authentication (Email/Password and Google).
+- Firestore data model for projects, posts, replies, votes, and subscriptions.
+- Post creation with project selection, post type (`question` or `issue`), and tags.
+- Feed filters by project, popular tags, search term, and ordering (date/likes/popularity).
+- Internationalization with `ngx-translate`:
+  : English (default), Spanish, German, Italian, Portuguese, French.
+  : Browser language detection and persisted language override.
+- Standalone Angular components with isolated HTML and SCSS files.
+- Unit tests (Vitest), ESLint, Prettier.
+- CI checks and GitHub Pages deployment workflows.
 
-```bash
-ng serve
-```
+## Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Angular 21 (standalone components)
+- TypeScript + SCSS
+- Firebase JS SDK (Auth + Firestore)
+- `@ngx-translate/core` + `@ngx-translate/http-loader`
+- ESLint + Prettier + Vitest
 
-## Code scaffolding
+## Local Setup
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+1. Install dependencies.
 
 ```bash
-ng build
+npm ci
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+2. Configure environment variables.
 
 ```bash
-ng test
+copy .env.example .env
 ```
 
-## Running end-to-end tests
+3. Fill `.env` with your Firebase Web App configuration values.
 
-For end-to-end (e2e) testing, run:
+4. Start development server.
 
 ```bash
-ng e2e
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The app runs on `http://localhost:4200`.
 
-## Additional Resources
+## Environment and Secrets
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Runtime values are read from `public/env.js` (generated automatically before `start` and `build`).
+- Generator script: `scripts/generate-env.mjs`.
+- `.env` is gitignored.
+- `.env.example` is committed with placeholders.
+
+Required keys:
+
+- `FIREBASE_API_KEY`
+- `FIREBASE_AUTH_DOMAIN`
+- `FIREBASE_PROJECT_ID`
+- `FIREBASE_STORAGE_BUCKET`
+- `FIREBASE_MESSAGING_SENDER_ID`
+- `FIREBASE_APP_ID`
+- `FIREBASE_MEASUREMENT_ID` (optional)
+
+## Firestore Collections
+
+- `projects/{projectId}`
+- `posts/{postId}`
+- `posts/{postId}/replies/{replyId}`
+- `posts/{postId}/votes/{uid}`
+- `posts/{postId}/subscriptions/{uid}`
+
+Sample `projects` documents are required for the post form project selector.
+
+## Firestore Rules
+
+- Rules file: `firestore.rules`
+- Index file: `firestore.indexes.json`
+
+The provided rules allow:
+
+- Public reads for forum content.
+- Authenticated creates for posts and replies.
+- Authenticated vote/subscription documents scoped to current user id.
+- Counter updates on posts for likes/replies/subscribers.
+
+Review and harden these rules before production launch.
+
+## Subscription Emails
+
+The app stores post subscriptions in Firestore. Sending emails is optional and not hard-coded in the frontend.
+
+Recommended production approach:
+
+1. Install Firebase Extension `firestore-send-email`.
+2. Trigger email writes to a `mail` collection from a backend function when new replies are created.
+
+## Scripts
+
+- `npm start` - runs env generation and starts dev server.
+- `npm run build` - runs env generation and production build.
+- `npm run lint` - ESLint.
+- `npm run format:check` - Prettier check.
+- `npm run format` - Prettier write.
+- `npm run test:ci` - one-shot unit tests.
+
+## CI and Deployment
+
+Workflow files:
+
+- `.github/workflows/ci.yml`
+- `.github/workflows/deploy-gh-pages.yml`
+
+### CI
+
+On `pull_request` and `push` to `main`, CI runs:
+
+1. `npm run format:check`
+2. `npm run lint`
+3. `npm run test:ci`
+4. `npm run build`
+
+### GitHub Pages
+
+On merges/pushes to `main`, deployment workflow:
+
+1. Re-runs quality checks.
+2. Builds with `--base-href "/<repo-name>/"`.
+3. Publishes `dist/forum-app/browser` to GitHub Pages.
+
+To enable Pages:
+
+1. Go to repository `Settings`.
+2. Open `Pages`.
+3. Set source to `GitHub Actions`.
+
+## Translation Files
+
+Translation dictionaries are under `public/assets/i18n/`:
+
+- `en.json`
+- `es.json`
+- `de.json`
+- `it.json`
+- `pt.json`
+- `fr.json`

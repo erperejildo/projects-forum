@@ -1,0 +1,76 @@
+.post-card {
+  border: 1px solid var(--border-color);
+  background: var(--surface-raised);
+  border-radius: 1rem;
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.card-header h3 {
+  margin: 0.2rem 0 0;
+  font-size: 1.06rem;
+}
+
+.meta {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.message {
+  margin: 0;
+  line-height: 1.45;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag {
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  padding: 0.2rem 0.55rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+button {
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: #fff;
+  color: var(--text-primary);
+  font: inherit;
+  padding: 0.3rem 0.65rem;
+  cursor: pointer;
+}
+
+.like-button.active {
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  color: #fff;
+}
+
+.open-button {
+  margin-left: auto;
+}

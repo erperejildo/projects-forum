@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isCounterUpdate() {
+      return request.resource.data.diff(resource.data).changedKeys().hasOnly([
+        'likesCount',
+        'repliesCount',
+        'subscribersCount',
+        'updatedAt'
+      ]);
+    }
+
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /posts/{postId} {
+      allow read: if true;
+
+      allow create: if isSignedIn() &&
+        request.resource.data.authorUid == request.auth.uid;
+
+      allow update: if isSignedIn() && (
+        resource.data.authorUid == request.auth.uid ||
+        isCounterUpdate()
+      );
+
+      allow delete: if false;
+
+      match /votes/{voteUserId} {
+        allow read, create, delete: if isSignedIn() && voteUserId == request.auth.uid;
+        allow update: if false;
+      }
+
+      match /subscriptions/{subscriptionUserId} {
+        allow read, create, delete: if isSignedIn() && subscriptionUserId == request.auth.uid;
+        allow update: if false;
+      }
+
+      match /replies/{replyId} {
+        allow read: if true;
+        allow create: if isSignedIn() && request.resource.data.authorUid == request.auth.uid;
+        allow update, delete: if false;
+      }
+    }
+  }
+}

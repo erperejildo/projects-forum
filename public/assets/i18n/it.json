@@ -1,0 +1,113 @@
+{
+  "header": {
+    "brand": "Forum Progetti",
+    "newPost": "+ Nuovo Post"
+  },
+  "auth": {
+    "signIn": "Accedi",
+    "logout": "Esci",
+    "closePanel": "Chiudi pannello",
+    "createAccount": "Crea account",
+    "signInContinue": "Accedi per continuare",
+    "email": "Email",
+    "password": "Password",
+    "passwordHint": "Almeno 6 caratteri",
+    "register": "Registrati",
+    "switchToLogin": "Ho gia un account",
+    "switchToRegister": "Crea account",
+    "continueGoogle": "Continua con Google"
+  },
+  "home": {
+    "title": "Forum",
+    "subtitle": "Esplora domande e problemi di tutti i progetti e condividi feedback.",
+    "signInVote": "Accedi per votare i post.",
+    "loadingPosts": "Caricamento post..."
+  },
+  "filters": {
+    "title": "Filtri",
+    "search": "Cerca",
+    "searchPlaceholder": "Cerca per titolo, messaggio o tag",
+    "project": "Progetto",
+    "allProjects": "Tutti i progetti",
+    "popularTags": "Tag popolari",
+    "noTags": "Nessun tag.",
+    "order": "Ordine",
+    "newest": "Piu recenti",
+    "mostLiked": "Piu votati",
+    "mostPopular": "Piu popolari",
+    "clear": "Pulisci filtri"
+  },
+  "postCard": {
+    "open": "Apri",
+    "like": "Mi piace",
+    "liked": "Piace",
+    "replies": "{{count}} risposte",
+    "popularity": "Popolarita {{score}}"
+  },
+  "postList": {
+    "empty": "Nessun post per i filtri selezionati."
+  },
+  "createPost": {
+    "back": "Torna al forum",
+    "title": "Crea un post",
+    "subtitle": "Seleziona progetto, tipo messaggio e tag chiari.",
+    "loadingProjects": "Caricamento progetti...",
+    "noProjects": "Nessun progetto trovato. Aggiungi documenti in Firestore.",
+    "defaultError": "Impossibile pubblicare il post."
+  },
+  "postForm": {
+    "title": "Titolo",
+    "titlePlaceholder": "Riassumi il tuo post",
+    "titleError": "Titolo obbligatorio (max 120 caratteri).",
+    "project": "Progetto",
+    "projectPlaceholder": "Seleziona un progetto",
+    "projectError": "Progetto obbligatorio.",
+    "type": "Tipo",
+    "typeQuestion": "Domanda",
+    "typeIssue": "Problema",
+    "message": "Messaggio",
+    "messagePlaceholder": "Descrivi la tua domanda o problema",
+    "messageError": "Il messaggio deve essere tra 10 e 3000 caratteri.",
+    "tags": "Tag",
+    "publishing": "Pubblicazione...",
+    "publish": "Pubblica post"
+  },
+  "tagInput": {
+    "placeholder": "Aggiungi un tag (Enter)",
+    "add": "Aggiungi",
+    "hint": "Fino a 5 tag."
+  },
+  "postDetail": {
+    "back": "Torna al forum",
+    "loading": "Caricamento post...",
+    "unavailable": "Post non disponibile.",
+    "idMissing": "ID post mancante.",
+    "notFound": "Post non trovato.",
+    "project": "Progetto",
+    "signInVote": "Accedi per votare.",
+    "signInNotify": "Accedi per gestire notifiche.",
+    "like": "Mi piace",
+    "unlike": "Non mi piace piu",
+    "subscribe": "Iscriviti",
+    "unsubscribe": "Annulla iscrizione",
+    "likes": "{{count}} mi piace",
+    "replies": "{{count}} risposte",
+    "subscribers": "{{count}} iscritti"
+  },
+  "replyForm": {
+    "label": "Risposta",
+    "placeholder": "Condividi una risposta costruttiva",
+    "error": "La risposta deve avere tra 2 e 1500 caratteri.",
+    "posting": "Pubblicazione...",
+    "post": "Invia risposta",
+    "signInHint": "Accedi per rispondere."
+  },
+  "replyList": {
+    "title": "Risposte",
+    "empty": "Nessuna risposta.",
+    "unknownUser": "Utente sconosciuto"
+  },
+  "language": {
+    "label": "Lingua"
+  }
+}

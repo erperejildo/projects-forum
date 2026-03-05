@@ -1,0 +1,44 @@
+.home-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+}
+
+.page-header p {
+  margin: 0.35rem 0 0;
+  color: var(--text-secondary);
+}
+
+.layout-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.feed-area {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.status,
+.error {
+  margin: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 0.65rem 0.8rem;
+}
+
+.error {
+  color: #a5103a;
+}
+
+@media (min-width: 960px) {
+  .layout-grid {
+    grid-template-columns: minmax(240px, 320px) 1fr;
+    align-items: start;
+  }
+}

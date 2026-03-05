@@ -1,12 +1,19 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
+import { AppHeader } from './components/layout/app-header/app-header';
+import { Language } from './core/services/language';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AppHeader],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('forum-app');
+  private readonly language = inject(Language);
+
+  constructor() {
+    this.language.initialize();
+  }
 }

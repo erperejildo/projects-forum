@@ -1,0 +1,104 @@
+.post-detail-page {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 900px;
+}
+
+.back-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.status,
+.error {
+  margin: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  background: #fff;
+  padding: 0.65rem 0.8rem;
+}
+
+.error {
+  color: #a5103a;
+}
+
+.post-card {
+  display: grid;
+  gap: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.post-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.type {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+h1 {
+  margin: 0.2rem 0 0;
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+}
+
+.date,
+.project {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.message {
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tags span {
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.78rem;
+}
+
+.meta-row {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.actions button {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+  background: #fff;
+  font: inherit;
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+}
+
+.actions button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}

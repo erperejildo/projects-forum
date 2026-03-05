@@ -1,0 +1,32 @@
+<article class="post-card">
+  <header class="card-header">
+    <div>
+      <p class="meta">
+        {{ post().projectName }} ·
+        {{ (post().type === 'issue' ? 'postForm.typeIssue' : 'postForm.typeQuestion') | translate }}
+      </p>
+      <h3>{{ post().title }}</h3>
+    </div>
+
+    <button type="button" class="like-button" [class.active]="liked()" (click)="onToggleVote()">
+      {{ (liked() ? 'postCard.liked' : 'postCard.like') | translate }} {{ post().likesCount }}
+    </button>
+  </header>
+
+  <p class="message">{{ post().message }}</p>
+
+  <div class="tag-row">
+    @for (tag of post().tags; track tag) {
+      <span class="tag">#{{ tag }}</span>
+    }
+  </div>
+
+  <footer class="card-footer">
+    <span>{{ post().createdAt | date: 'medium' }}</span>
+    <span>{{ 'postCard.replies' | translate: { count: post().repliesCount } }}</span>
+    <span>{{ 'postCard.popularity' | translate: { score: popularity() } }}</span>
+    <button type="button" class="open-button" (click)="onOpenPost()">
+      {{ 'postCard.open' | translate }}
+    </button>
+  </footer>
+</article>

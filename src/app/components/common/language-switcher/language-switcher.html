@@ -1,0 +1,12 @@
+<label class="visually-hidden" for="language-picker">{{ 'language.label' | translate }}</label>
+
+<select
+  id="language-picker"
+  class="language-picker"
+  [value]="selectedLanguage"
+  (change)="onLanguageChange($any($event.target).value)"
+>
+  @for (option of options; track option.code) {
+    <option [value]="option.code">{{ option.label }}</option>
+  }
+</select>
