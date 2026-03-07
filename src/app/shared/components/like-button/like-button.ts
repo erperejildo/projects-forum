@@ -1,9 +1,10 @@
 import { Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-like-button',
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, MatIcon],
   templateUrl: './like-button.html',
   styleUrl: './like-button.scss',
 })

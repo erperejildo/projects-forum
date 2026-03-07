@@ -38,12 +38,7 @@
     align-items: center;
 }
 
-.kebab-trigger {
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-control);
-    color: var(--text-main);
-    background: rgba(8, 18, 28, 0.72);
-}
+/* kebab-trigger style removed to use default mat-icon-button look */
 
 .post-editor {
     display: grid;

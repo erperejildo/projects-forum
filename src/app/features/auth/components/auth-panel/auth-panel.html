@@ -2,7 +2,9 @@
     <mat-card-header>
         <mat-card-title>{{ (mode() === 'sign-in' ? 'auth.signIn' : 'auth.register') | translate }}</mat-card-title>
         <div class="header-actions">
-            <button mat-icon-button type="button" (click)="close()">{{ 'common.close' | translate }}</button>
+            <button mat-icon-button aria-label="{{ 'common.close' | translate }}" type="button" (click)="close()">
+                <mat-icon>close</mat-icon>
+            </button>
         </div>
     </mat-card-header>
 
@@ -49,6 +51,24 @@
                 </mat-error>
                 }
             </mat-form-field>
+
+            <!-- confirm password only for registration -->
+            @if (mode() === 'register') {
+            <mat-form-field appearance="fill">
+                <mat-label>{{ 'auth.confirmPassword' | translate }}</mat-label>
+                <input matInput type="password" formControlName="confirmPassword" autocomplete="new-password" />
+                @if ((form.controls.confirmPassword.invalid && form.controls.confirmPassword.touched) || (form.errors?.['passwordsMismatch'] && form.controls.confirmPassword.touched)) {
+                <mat-error>
+                    @if (form.controls.confirmPassword.errors?.['required']) {
+                    <span>{{ 'auth.passwordRequired' | translate }}</span>
+                    }
+                    @if (form.errors?.['passwordsMismatch']) {
+                    <span>{{ 'auth.passwordsMismatch' | translate }}</span>
+                    }
+                </mat-error>
+                }
+            </mat-form-field>
+            }
 
             @if (errorMessage()) {
             <div class="danger-text">{{ errorMessage() }}</div>

@@ -251,6 +251,9 @@ textarea {
   display: inline-block;
 }
 
+/* no custom kebab-trigger styles; let angular material handle icon-button appearance */
+/* padding is handled by mat-icon-button */
+
 .icon--sm {
   width: var(--icon-size-sm);
   height: var(--icon-size-sm);
