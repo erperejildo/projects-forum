@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ForumPost, ForumReply } from '../../../../core/models/forum-models';
@@ -12,16 +12,30 @@ import { LikeButton } from '../../../../shared/components/like-button/like-butto
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { openConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
 @Component({
   selector: 'app-post-detail-page',
-  imports: [TranslatePipe, DatePipe, ReplyList, LikeButton, MatButtonModule, MatMenuModule, MatIconModule],
+  imports: [
+    TranslatePipe,
+    DatePipe,
+    ReplyList,
+    LikeButton,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDialogModule,
+  ],
   templateUrl: './post-detail-page.html',
   styleUrl: './post-detail-page.scss',
 })
 export class PostDetailPage {
   readonly authService = inject(Auth);
   readonly forumService = inject(Forum);
+  private readonly translate = inject(TranslateService);
+  // material dialog used for confirmations
+  private readonly dialog = inject(MatDialog);
 
   readonly post = signal<ForumPost | null>(null);
   readonly replies = signal<ForumReply[]>([]);
@@ -225,6 +239,13 @@ export class PostDetailPage {
   }
 
   async deletePost(): Promise<void> {
+    // confirm with user before actually deleting
+    const msg = this.translate.instant('post.confirmDeletePost');
+    const ok = await openConfirmDialog(this.dialog, msg);
+    if (!ok) {
+      return;
+    }
+
     const id = this.postId();
     const user = this.authService.user();
     if (!id || !user) {

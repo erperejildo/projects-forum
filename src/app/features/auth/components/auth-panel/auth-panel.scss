@@ -9,6 +9,13 @@
         gap: 1rem;
     }
 
+    .header-actions {
+        /* ensure the close icon hugs the top-right corner */
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
     form {
         display: grid;
         gap: 0.75rem;
@@ -24,7 +31,9 @@
 
 .mode-row {
     display: flex;
+    justify-content: flex-end; /* align buttons to right */
     gap: 0.6rem;
+    margin-bottom: 1rem; /* space between mode row and first input */
 
     .selected {
         border-color: var(--accent-strong);

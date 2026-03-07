@@ -12,7 +12,13 @@
         "register": "Register",
         "email": "Email",
         "password": "Password",
-        "continueWithGoogle": "Continue with Google"
+        "continueWithGoogle": "Continue with Google",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "passwordRequired": "Password is required",
+        "passwordMinLength": "Password must be at least {{min}} characters",
+        "confirmPassword": "Confirm password",
+        "passwordsMismatch": "Passwords do not match"
     },
     "common": {
         "close": "Close",
@@ -59,7 +65,10 @@
         "deletePost": "Delete post",
         "editReply": "Edit reply",
         "deleteReply": "Delete reply",
+        "confirmDeletePost": "Are you sure you want to delete this post?",
+        "confirmDeleteReply": "Are you sure you want to delete this reply?",
         "replyRequiresAuth": "Sign in to reply.",
+        "replyRequired": "Reply cannot be empty",
         "notFound": "This post could not be found."
     },
     "create": {

@@ -12,7 +12,11 @@
         "register": "Registrieren",
         "email": "E-Mail",
         "password": "Passwort",
-        "continueWithGoogle": "Mit Google fortfahren"
+        "continueWithGoogle": "Mit Google fortfahren",
+        "emailRequired": "E-Mail ist erforderlich",
+        "emailInvalid": "Bitte gib eine gültige E-Mail-Adresse ein",
+        "passwordRequired": "Passwort ist erforderlich",
+        "passwordMinLength": "Das Passwort muss mindestens {{min}} Zeichen lang sein"
     },
     "common": {
         "close": "Schliessen",
@@ -59,7 +63,10 @@
         "deletePost": "Beitrag loschen",
         "editReply": "Antwort bearbeiten",
         "deleteReply": "Antwort loschen",
+        "confirmDeletePost": "Sind Sie sicher, dass Sie diesen Beitrag löschen möchten?",
+        "confirmDeleteReply": "Sind Sie sicher, dass Sie diese Antwort löschen möchten?",
         "replyRequiresAuth": "Zum Antworten bitte anmelden.",
+        "replyRequired": "Antwort darf nicht leer sein",
         "notFound": "Dieser Beitrag wurde nicht gefunden."
     },
     "create": {

@@ -12,7 +12,13 @@
         "register": "Registrarse",
         "email": "Correo",
         "password": "Contraseña",
-        "continueWithGoogle": "Continuar con Google"
+        "continueWithGoogle": "Continuar con Google",
+        "emailRequired": "Correo obligatorio",
+        "emailInvalid": "Por favor introduce un correo válido",
+        "passwordRequired": "Contraseña obligatoria",
+        "passwordMinLength": "La contraseña debe tener al menos {{min}} caracteres",
+        "confirmPassword": "Confirmar contraseña",
+        "passwordsMismatch": "Las contraseñas no coinciden"
     },
     "common": {
         "close": "Cerrar",
@@ -59,7 +65,10 @@
         "deletePost": "Eliminar publicación",
         "editReply": "Editar respuesta",
         "deleteReply": "Eliminar respuesta",
+        "confirmDeletePost": "¿Seguro que quieres eliminar esta publicación?",
+        "confirmDeleteReply": "¿Seguro que quieres eliminar esta respuesta?",
         "replyRequiresAuth": "Inicia sesión para responder.",
+        "replyRequired": "La respuesta no puede estar vacía",
         "notFound": "No se pudo encontrar esta publicación."
     },
     "create": {

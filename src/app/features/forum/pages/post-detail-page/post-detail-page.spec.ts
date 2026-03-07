@@ -1,3 +1,7 @@
+// jasmine's spyOn helper is globally available in specs
+
+declare const spyOn: any;
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { convertToParamMap, ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
@@ -9,6 +13,9 @@ import {
   createForumMock,
   provideUiTesting,
 } from '../../../../testing/testing-providers';
+
+import * as confirmModule from '../../../../shared/components/confirm-dialog/confirm-dialog';
+import { setConfirmDialogHandler } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
 import { PostDetailPage } from './post-detail-page';
 
@@ -32,6 +39,7 @@ describe('PostDetailPage', () => {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+  // we'll spy on the helper function that opens the dialog
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -51,6 +59,7 @@ describe('PostDetailPage', () => {
 
     fixture = TestBed.createComponent(PostDetailPage);
     component = fixture.componentInstance;
+    setConfirmDialogHandler(() => Promise.resolve(false));
     await fixture.whenStable();
   });
 
@@ -73,5 +82,36 @@ describe('PostDetailPage', () => {
 
     expect(cancelBtn).toBeTruthy();
     expect(saveBtn).toBeTruthy();
+  });
+
+  it('kebab trigger has no border and no custom background', () => {
+    // the component has an actions section with a kebab trigger
+    fixture.detectChanges();
+    const kebab: HTMLElement | null = fixture.nativeElement.querySelector(
+      'button.kebab-trigger'
+    );
+    if (kebab) {
+      const style = getComputedStyle(kebab);
+      expect(style.borderStyle).toBe('none');
+      // background should be transparent so that ripple is the only effect
+      expect(style.backgroundColor).toBe('rgba(0, 0, 0, 0)');
+    }
+  });
+
+  it('deletePost respects confirmation dialog', async () => {
+    let deletedCalled = false;
+    (forumMock as any).softDeletePost = async () => {
+      deletedCalled = true;
+    };
+
+    // dialog returns false first
+    setConfirmDialogHandler(() => Promise.resolve(false));
+    await component.deletePost();
+    expect(deletedCalled).toBe(false);
+
+    // now true
+    setConfirmDialogHandler(() => Promise.resolve(true));
+    await component.deletePost();
+    expect(deletedCalled).toBe(true);
   });
 });

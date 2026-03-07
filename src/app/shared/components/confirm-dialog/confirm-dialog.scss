@@ -1,0 +1,5 @@
+/* simple padding so text isn't glued to edge */
+:host {
+  display: block;
+  padding: 16px;
+}
