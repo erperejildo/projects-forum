@@ -1,0 +1,79 @@
+@if (loading()) {
+<p class="muted">{{ 'common.loading' | translate }}</p>
+} @else if (!post()) {
+<p class="muted">{{ 'post.notFound' | translate }}</p>
+} @else {
+<article class="surface detail-card">
+    <header>
+        <div class="meta">
+            <span class="chip">{{ projectName(post()!.projectId) }}</span>
+            <span class="chip">{{ 'post.' + post()!.type | translate }}</span>
+            <time>{{ post()!.createdAt | date: 'dd/MM/yy, h:mm a' }}</time>
+        </div>
+
+        <div class="actions">
+            <app-like-button [liked]="liked()" [likesCount]="post()!.likesCount" [disabled]="busy()"
+                (toggled)="onLikeToggle()"></app-like-button>
+
+            <!-- Subscription button hidden until feature is implemented -->
+            <button class="button-secondary" type="button" hidden [disabled]="busy()" (click)="onSubscriptionToggle()">
+                {{ subscribed() ? ('post.unsubscribe' | translate) : ('post.subscribe' | translate) }}
+            </button>
+
+            @if (canManagePost()) {
+            <button mat-icon-button type="button" class="kebab-trigger" [disabled]="busy()"
+                [matMenuTriggerFor]="postActionsMenu" aria-label="Post actions">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #postActionsMenu="matMenu" class="post-actions-menu" xPosition="before">
+                @if (canEditPost()) {
+                <button mat-menu-item type="button" [disabled]="busy()" (click)="startPostEdit()">
+                    {{ 'common.edit' | translate }}
+                </button>
+                }
+                <button mat-menu-item type="button" [disabled]="busy()" (click)="deletePost()">
+                    {{ 'common.delete' | translate }}
+                </button>
+            </mat-menu>
+            }
+        </div>
+    </header>
+
+    @if (editingPost()) {
+    <div class="post-editor">
+        <textarea [value]="postDraft()" [disabled]="busy()" (input)="onPostDraftChange($event)"></textarea>
+        <div class="editor-actions">
+            <button mat-stroked-button class="btn-style2" type="button" [disabled]="busy()" (click)="cancelPostEdit()">
+                {{ 'common.cancel' | translate }}
+            </button>
+            <button mat-flat-button color="primary" class="btn-style1" type="button" [disabled]="busy()"
+                (click)="savePostEdit()">
+                {{ 'common.save' | translate }}
+            </button>
+        </div>
+    </div>
+    } @else {
+    <p class="message">{{ post()!.message }}</p>
+    }
+
+    <div class="tags-row">
+        @for (tag of post()!.tags; track tag) {
+        <span class="chip">#{{ tag }}</span>
+        }
+    </div>
+
+    <footer class="muted">
+        <span>{{ post()!.likesCount }} {{ 'post.likes' | translate }}</span>
+        <span>{{ post()!.replyCount }} {{ 'post.replies' | translate }}</span>
+        <span>{{ 'post.by' | translate }} {{ post()!.authorDisplayName }}</span>
+    </footer>
+</article>
+
+<app-reply-list [replies]="replies()" [canReply]="authService.isAuthenticated()" [submitting]="busy()"
+    [currentUserId]="currentUserId()" [isAdmin]="authService.isAdmin()" (replySubmitted)="onReplySubmitted($event)"
+    (replyUpdated)="onReplyUpdated($event)" (replyDeleted)="onReplyDeleted($event)"></app-reply-list>
+
+@if (errorMessage()) {
+<p class="danger-text">{{ errorMessage() }}</p>
+}
+}

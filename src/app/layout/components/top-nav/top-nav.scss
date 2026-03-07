@@ -1,0 +1,158 @@
+.nav-root {
+    margin: 1rem auto;
+    width: min(1120px, 92vw);
+    height: auto;
+    padding: 0.9rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+
+    strong {
+        display: block;
+        font-size: 1.1rem;
+    }
+
+    p {
+        margin: 0.1rem 0 0;
+        font-size: 0.82rem;
+        color: var(--text-muted);
+    }
+}
+
+.brand-dot {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-strong), #45a8ff);
+    box-shadow: 0 0 0 4px rgba(8, 240, 190, 0.15);
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    min-width: 0;
+    justify-content: center;
+
+    a {
+        border-radius: var(--radius-control);
+        border: 1px solid transparent;
+        padding: 0.35rem 0.75rem;
+        color: var(--text-muted);
+    }
+
+    a:hover,
+    .active-link {
+        border-color: var(--line-strong);
+        color: var(--text-main);
+        background: rgba(5, 16, 28, 0.72);
+    }
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 0;
+}
+
+.identity-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.identity-value {
+    /* allow shrinking on narrow screens */
+    min-width: 0;
+    max-width: 200px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.88rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: right;
+}
+
+.btn-style1 {
+    /* formerly .signout-top; used for primary actions (sign out, save/ok/done, etc.)
+       default background defined here, but hover handled by Material so that
+       Save/primary actions retain their color. */
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-color: var(--line-strong);
+    color: var(--text-main) !important;
+    background: rgba(6, 15, 25, 0.75) !important;
+}
+
+.btn-style2 {
+    /* secondary/cancel actions: keep the simpler cancel hover behaviour */
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-color: var(--line-strong);
+    color: var(--text-main) !important;
+    background: transparent !important;
+
+    &:hover:not(:disabled) {
+        /* mimic the previous .button-secondary hover */
+        transform: translateY(-1px);
+        background: rgba(8, 18, 28, 0.7) !important;
+    }
+}
+
+.header-action-control {
+    border-radius: var(--radius-control);
+    min-height: 38px;
+}
+
+.auth-panel-wrap {
+    width: min(1120px, 92vw);
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+@media (max-width: 880px) {
+    .nav-root {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
+
+    .brand,
+    .nav-links,
+    .actions {
+        width: 100%;
+    }
+
+    .actions {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .identity-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
+
+    .identity-value {
+        text-align: left;
+    }
+}

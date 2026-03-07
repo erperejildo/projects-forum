@@ -5,13 +5,27 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    // Admin helper: recognizes either a custom claim `admin == true`
+    // or the specific admin email. Using `request.auth.token.email` is
+    // convenient for testing but less secure than custom claims.
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.admin == true
+      );
+    }
+
     function isCounterUpdate() {
       return request.resource.data.diff(resource.data).changedKeys().hasOnly([
         'likesCount',
+        'replyCount',
         'repliesCount',
         'subscribersCount',
         'updatedAt'
       ]);
+    }
+
+    function keepsAuthorId() {
+      return request.resource.data.authorId == resource.data.authorId;
     }
 
     match /projects/{projectId} {
@@ -22,18 +36,34 @@ service cloud.firestore {
     match /posts/{postId} {
       allow read: if true;
 
-      allow create: if isSignedIn() &&
-        request.resource.data.authorUid == request.auth.uid;
+      allow create: if isSignedIn() && (
+        request.resource.data.authorId == request.auth.uid ||
+        isAdmin()
+      );
 
       allow update: if isSignedIn() && (
-        resource.data.authorUid == request.auth.uid ||
-        isCounterUpdate()
+        (resource.data.authorId == request.auth.uid && keepsAuthorId()) ||
+        isCounterUpdate() ||
+        (isAdmin() && keepsAuthorId())
       );
 
       allow delete: if false;
 
       match /votes/{voteUserId} {
-        allow read, create, delete: if isSignedIn() && voteUserId == request.auth.uid;
+        allow read: if isSignedIn();
+        allow create: if isSignedIn() &&
+                      voteUserId == request.auth.uid &&
+                      request.resource.data.uid == request.auth.uid;
+        allow delete: if isSignedIn() && voteUserId == request.auth.uid;
+        allow update: if false;
+      }
+      // Allow likes collection (client uses 'likes' path)
+      match /likes/{likeUserId} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn() &&
+                      likeUserId == request.auth.uid &&
+                      request.resource.data.uid == request.auth.uid;
+        allow delete: if isSignedIn() && likeUserId == request.auth.uid;
         allow update: if false;
       }
 
@@ -44,8 +74,11 @@ service cloud.firestore {
 
       match /replies/{replyId} {
         allow read: if true;
-        allow create: if isSignedIn() && request.resource.data.authorUid == request.auth.uid;
-        allow update, delete: if false;
+        allow create: if isSignedIn() && request.resource.data.authorId == request.auth.uid;
+        allow update: if isSignedIn() &&
+                      request.resource.data.authorId == resource.data.authorId &&
+                      (resource.data.authorId == request.auth.uid || isAdmin());
+        allow delete: if false;
       }
     }
   }

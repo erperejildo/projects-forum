@@ -1,19 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
-import { AppHeader } from './components/layout/app-header/app-header';
-import { Language } from './core/services/language';
+import { TopNav } from './layout/components/top-nav/top-nav';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppHeader],
+  imports: [RouterOutlet, TopNav],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App {
-  private readonly language = inject(Language);
-
-  constructor() {
-    this.language.initialize();
-  }
-}
+export class App { }

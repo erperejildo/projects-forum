@@ -1,0 +1,37 @@
+<section class="surface filter-bar">
+    <mat-form-field appearance="outline">
+        <mat-label>{{ 'filters.search' | translate }}</mat-label>
+        <input matInput type="search" [value]="search()" (input)="onSearchChange($event)"
+            [placeholder]="'filters.searchPlaceholder' | translate" />
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>{{ 'filters.project' | translate }}</mat-label>
+        <mat-select [value]="selectedProject()" (selectionChange)="onProjectChange($event.value)">
+            <mat-option value="">{{ 'filters.allProjects' | translate }}</mat-option>
+            @for (project of projects(); track project.id) {
+            <mat-option [value]="project.id">{{ project.name }}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>{{ 'filters.tag' | translate }}</mat-label>
+        <mat-select [value]="selectedTag()" (selectionChange)="onTagChange($event.value)">
+            <mat-option value="">{{ 'filters.allTags' | translate }}</mat-option>
+            @for (tag of tags(); track tag) {
+            <mat-option [value]="tag">{{ tag }}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>{{ 'filters.order' | translate }}</mat-label>
+        <mat-select [value]="order()" (selectionChange)="onOrderChange($event.value)">
+            <mat-option value="date">{{ 'filters.orderDate' | translate }}</mat-option>
+            <mat-option value="popularity">{{ 'filters.orderPopularity' | translate }}</mat-option>
+            <mat-option value="likes">{{ 'filters.orderLikes' | translate }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</section>

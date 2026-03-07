@@ -1,0 +1,89 @@
+.replies {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.thread {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.reply-card {
+    border-radius: var(--radius-lg);
+    padding: 0.8rem;
+    min-height: 0;
+    display: block;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        margin: 0;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    time {
+        color: var(--text-muted);
+        font-size: 0.82rem;
+    }
+}
+
+.reply-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.kebab-trigger {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-control);
+    color: var(--text-main);
+    background: rgba(8, 18, 28, 0.72);
+}
+
+.editor-wrap {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.editor-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.composer {
+    display: grid;
+    gap: 0.65rem;
+}
+
+:is(.composer-field, .editor-field) {
+    .mdc-text-field {
+        background: transparent;
+    }
+
+    .mat-mdc-input-element {
+        color: var(--text-main);
+    }
+}
+
+.reply-submit {
+    border-radius: var(--radius-control);
+    min-height: 42px;
+    font-weight: 700;
+    color: #04131a !important;
+    background: linear-gradient(135deg, var(--accent-strong), var(--accent)) !important;
+
+    &:hover:not(:disabled) {
+        color: #04131a !important;
+        background: linear-gradient(135deg, var(--accent-strong), var(--accent)) !important;
+        filter: brightness(1.03);
+    }
+}
