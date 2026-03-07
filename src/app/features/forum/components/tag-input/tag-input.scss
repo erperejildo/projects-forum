@@ -1,0 +1,14 @@
+.tag-input-wrap {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.tag-chip {
+    cursor: pointer;
+}

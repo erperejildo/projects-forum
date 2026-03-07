@@ -1,0 +1,41 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Auth } from '../../../core/services/auth';
+import { createAuthMock, provideUiTesting } from '../../../testing/testing-providers';
+
+import { TopNav } from './top-nav';
+
+describe('TopNav', () => {
+  let component: TopNav;
+  let fixture: ComponentFixture<TopNav>;
+  const authMock = createAuthMock();
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TopNav],
+      providers: [...provideUiTesting(), { provide: Auth, useValue: authMock }],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TopNav);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('sign out uses primary style class', async () => {
+    // Ensure auth mock reports a logged-in user so the button appears
+    // the computed isAuthenticated will flip automatically when user changes
+    component.authService.user.set({ uid: 'u', displayName: 'User', email: 'u@example.com' } as any);
+    // also flip the explicit authenticated signal on the mock
+    (component.authService.isAuthenticated as any).set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const btn: HTMLElement | null = fixture.nativeElement.querySelector(
+      'button.btn-style1'
+    );
+    expect(btn).toBeTruthy();
+  });
+});

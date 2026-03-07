@@ -1,0 +1,23 @@
+.switcher {
+    min-width: 180px;
+
+    :is(.mat-mdc-select-value, .mat-mdc-form-field-infix) {
+        color: var(--text-main);
+        font-size: 0.9rem;
+    }
+
+    :is(.mat-mdc-form-field-focus-overlay, .mdc-text-field--outlined .mdc-text-field__input) {
+        color: var(--text-main);
+    }
+
+    .mdc-text-field {
+        background: rgba(6, 15, 25, 0.75);
+    }
+
+    .mdc-floating-label {
+        color: var(--text-muted) !important;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 0.72rem;
+    }
+}

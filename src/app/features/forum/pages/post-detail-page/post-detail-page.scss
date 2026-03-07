@@ -1,0 +1,76 @@
+.detail-card {
+    display: grid;
+    gap: 1rem;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+.meta {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    align-items: center;
+
+    time {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+    }
+}
+
+.message {
+    margin: 0;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.kebab-trigger {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-control);
+    color: var(--text-main);
+    background: rgba(8, 18, 28, 0.72);
+}
+
+.post-editor {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+@media (max-width: 760px) {
+    .detail-card header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

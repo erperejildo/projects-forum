@@ -1,44 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
-import { signal } from '@angular/core';
-import { provideTranslateService } from '@ngx-translate/core';
-
-import { App } from './app';
 import { Auth } from './core/services/auth';
-import { Language } from './core/services/language';
+import { createAuthMock, provideUiTesting } from './testing/testing-providers';
+import { App } from './app';
 
 describe('App', () => {
-  const authMock = {
-    currentUser: signal(null),
-    isAuthenticated: () => false,
-    userLabel: () => '',
-    signInWithGoogle: async () => undefined,
-    signInWithEmailPassword: async () => undefined,
-    registerWithEmailPassword: async () => undefined,
-    logout: async () => undefined,
-  };
-
-  const languageMock = {
-    currentLanguage: () => 'en',
-    setLanguage: () => undefined,
-    initialize: () => undefined,
-  };
+  const authMock = createAuthMock();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [
-        provideRouter([]),
-        provideTranslateService(),
-        {
-          provide: Auth,
-          useValue: authMock,
-        },
-        {
-          provide: Language,
-          useValue: languageMock,
-        },
-      ],
+      providers: [...provideUiTesting(), { provide: Auth, useValue: authMock }],
     }).compileComponents();
   });
 
@@ -48,10 +19,10 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render app shell', async () => {
+  it('should render top navigation shell', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.app-shell')).toBeTruthy();
+    expect(compiled.querySelector('app-top-nav')).toBeTruthy();
   });
 });

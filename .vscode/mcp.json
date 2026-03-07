@@ -7,11 +7,11 @@
     "firebase": {
       "type": "stdio",
       "command": "npx",
-      "args": [
-        "-y",
-        "firebase-tools@latest",
-        "mcp"
-      ]
+      "args": ["-y", "firebase-tools@latest", "mcp"]
     },
-  },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    }
+  }
 }

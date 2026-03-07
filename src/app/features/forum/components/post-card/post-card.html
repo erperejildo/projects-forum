@@ -1,0 +1,34 @@
+<mat-card class="post-card surface" [routerLink]="['/post', post().id]">
+    <mat-card-header class="card-header">
+        <div class="header-main">
+            <div class="author">{{ post().authorDisplayName }}</div>
+            <div class="meta">
+                <span class="chip">{{ projectName() || post().projectId }}</span>
+                <span class="chip type" [class.issue]="post().type === 'issue'">{{ 'post.' + post().type | translate
+                    }}</span>
+                <time>{{ post().createdAt | date: 'dd/MM/yy' }}</time>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <app-like-button [liked]="liked()" [likesCount]="post().likesCount" [disabled]="!canLike()"
+                (toggled)="onLikeClick()"></app-like-button>
+        </div>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p>{{ post().message }}</p>
+
+        <div class="tags-row">
+            @for (tag of post().tags; track tag) {
+            <span class="chip">#{{ tag }}</span>
+            }
+        </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <div class="stats muted">
+            <span>{{ post().replyCount }} {{ 'post.replies' | translate }}</span>
+        </div>
+    </mat-card-actions>
+</mat-card>

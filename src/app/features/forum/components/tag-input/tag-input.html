@@ -1,0 +1,16 @@
+<div class="tag-input-wrap">
+    <mat-form-field class="full-width" appearance="outline">
+        <div class="tags">
+            @for (tag of tags(); track tag) {
+            <button class="chip tag-chip" type="button" (click)="removeTag(tag)" aria-label="Remove tag">
+                <span class="tag-text">#{{ tag }}</span>
+                <mat-icon class="x-icon" aria-hidden="true">cancel</mat-icon>
+            </button>
+            }
+        </div>
+
+        <input #tagInput matInput [placeholder]="'create.tagsPlaceholder' | translate" [value]="draft()"
+            (input)="onDraftInput($event)" (keydown)="onDraftKeyDown($event)" aria-label="Tag input" />
+    </mat-form-field>
+
+</div>

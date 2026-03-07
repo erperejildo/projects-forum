@@ -1,0 +1,78 @@
+{
+    "nav": {
+        "subtitle": "Supporto community per le tue app",
+        "home": "Home",
+        "createPost": "Crea post",
+        "language": "Lingua",
+        "account": "Account"
+    },
+    "auth": {
+        "signIn": "Accedi",
+        "signOut": "Esci",
+        "register": "Registrati",
+        "email": "Email",
+        "password": "Password",
+        "continueWithGoogle": "Continua con Google"
+    },
+    "common": {
+        "close": "Chiudi",
+        "add": "Aggiungi",
+        "cancel": "Annulla",
+        "edit": "Modifica",
+        "delete": "Elimina",
+        "save": "Salva",
+        "loading": "Caricamento..."
+    },
+    "home": {
+        "title": "Domande e feedback in un unico posto",
+        "subtitle": "Consulta problemi, fai domande e aiuta altri utenti nei tuoi progetti.",
+        "askButton": "Chiedi aiuto",
+        "fallbackProjectsNotice": "Uso della lista progetti locale finche i progetti Firestore non sono disponibili.",
+        "noPosts": "Nessun post corrisponde ai filtri correnti."
+    },
+    "filters": {
+        "search": "Cerca",
+        "searchPlaceholder": "Cerca per testo o autore",
+        "project": "Progetto",
+        "allProjects": "Tutti i progetti",
+        "tag": "Tag popolari",
+        "allTags": "Tutti i tag",
+        "order": "Ordina",
+        "orderDate": "Piu recenti",
+        "orderPopularity": "Piu popolari",
+        "orderLikes": "Piu apprezzati"
+    },
+    "post": {
+        "question": "Domanda",
+        "issue": "Problema",
+        "likes": "mi piace",
+        "replies": "risposte",
+        "unlike": "Rimuovi mi piace",
+        "liked": "Piaciuto",
+        "subscribe": "Iscriviti",
+        "unsubscribe": "Disiscriviti",
+        "by": "Da",
+        "noReplies": "Nessuna risposta per ora.",
+        "replyPlaceholder": "Scrivi la tua risposta",
+        "addReply": "Aggiungi risposta",
+        "editPost": "Modifica post",
+        "deletePost": "Elimina post",
+        "editReply": "Modifica risposta",
+        "deleteReply": "Elimina risposta",
+        "replyRequiresAuth": "Accedi per rispondere.",
+        "notFound": "Questo post non e stato trovato."
+    },
+    "create": {
+        "title": "Crea un nuovo post",
+        "subtitle": "Seleziona il progetto, il tipo di post e inserisci i dettagli.",
+        "project": "Progetto",
+        "type": "Tipo di post",
+        "message": "Messaggio",
+        "messagePlaceholder": "Descrivi la tua domanda o problema",
+        "tags": "Tag",
+        "tagsPlaceholder": "Aggiungi un tag e premi Invio",
+        "messageRequired": "Il messaggio è obbligatorio",
+        "messageMinLength": "Il messaggio deve contenere almeno {{min}} caratteri",
+        "submit": "Pubblica"
+    }
+}

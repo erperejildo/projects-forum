@@ -1,17 +1,11 @@
-:host {
-  display: block;
-  min-height: 100dvh;
-}
-
 .app-shell {
-  min-height: 100dvh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .app-main {
+  width: min(1120px, 92vw);
+  margin: 1.5rem auto 3rem;
   flex: 1;
-  width: min(1200px, 100% - 2rem);
-  margin: 0 auto;
-  padding: 1.25rem 0 2rem;
 }

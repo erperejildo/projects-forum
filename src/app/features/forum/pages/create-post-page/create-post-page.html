@@ -1,0 +1,56 @@
+<mat-card class="surface create-post-card">
+    <mat-card-title>{{ 'create.title' | translate }}</mat-card-title>
+    <mat-card-subtitle class="muted">{{ 'create.subtitle' | translate }}</mat-card-subtitle>
+
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>{{ 'create.project' | translate }}</mat-label>
+                <mat-select formControlName="projectId">
+                    @for (project of projects(); track project.id) {
+                    <mat-option [value]="project.id">{{ project.name }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>{{ 'create.type' | translate }}</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option value="question">{{ 'post.question' | translate }}</mat-option>
+                    <mat-option value="issue">{{ 'post.issue' | translate }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>{{ 'create.message' | translate }}</mat-label>
+                <textarea matInput formControlName="message"
+                    [placeholder]="'create.messagePlaceholder' | translate"></textarea>
+            </mat-form-field>
+
+            @if (form.controls.message.touched && form.controls.message.invalid) {
+            <div class="danger-text">
+                @if (form.controls.message.errors?.['required']) {
+                <p>{{ 'create.messageRequired' | translate }}</p>
+                }
+                @if (minlengthError) {
+                <p>{{ 'create.messageMinLength' | translate:{min: minlengthError?.requiredLength || 8} }}</p>
+                }
+            </div>
+            }
+
+            <div class="tags-field">
+                <span class="field-label">{{ 'create.tags' | translate }}</span>
+                <app-tag-input [tags]="tags()" (tagsChange)="updateTags($event)"></app-tag-input>
+            </div>
+
+            @if (errorMessage()) {
+            <p class="danger-text">{{ errorMessage() }}</p>
+            }
+
+            <div class="form-actions">
+                <button mat-flat-button color="primary" type="submit" [disabled]="submitting()">{{ 'create.submit' |
+                    translate }}</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

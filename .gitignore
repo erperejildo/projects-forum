@@ -11,6 +11,14 @@
 npm-debug.log
 yarn-error.log
 
+# Local secrets
+.env
+.env.local
+
+# Generated environment file - optional to ignore if you don't want the Firebase
+# config committed. It will be re-created by `npm run prepare:env`.
+src/environments/environment.ts
+
 # IDEs and editors
 .idea/
 .project
@@ -38,8 +46,6 @@ yarn-error.log
 testem.log
 /typings
 __screenshots__/
-.env
-public/env.js
 
 # System files
 .DS_Store

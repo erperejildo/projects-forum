@@ -1,25 +1,283 @@
+@use '@angular/material' as mat;
+
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700&display=swap');
+
 :root {
-  /* color palette */
-  --primary-color: #2c3e50;
-  --accent-color: #2980b9;
-  --border-color: #ccd0d5;
-  --text-primary: #2c3e50;
-  --text-secondary: #6c757d;
-  --background-color: #f7f9fc;
+  --bg-ink: #0b1220;
+  --bg-deep: #081019;
+  --bg-panel: rgba(13, 29, 43, 0.8);
+  --bg-panel-soft: rgba(14, 35, 53, 0.55);
+  --line: rgba(155, 202, 255, 0.2);
+  --line-strong: rgba(155, 202, 255, 0.45);
+  --text-main: #ecf5ff;
+  --text-muted: #b2c5d8;
+  --accent: #39d4b4;
+  --accent-strong: #08f0be;
+  --warning: #f89553;
+  --danger: #f96f7a;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  --radius-xl: 22px;
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-control: var(--radius-md);
+  /* Icon tokens */
+  --icon-size-sm: 0.75rem;
+  --icon-size-md: 1rem;
+  --icon-size-lg: 1.25rem;
+  --icon-color: var(--text-main);
 }
 
-/* basic reset */
+html {
+  color-scheme: dark;
+  @include mat.theme((color: (theme-type: dark,
+        primary: mat.$cyan-palette,
+        tertiary: mat.$azure-palette,
+      ),
+      typography: (plain-family: 'Manrope',
+        brand-family: 'Space Grotesk',
+        bold-weight: 700,
+        medium-weight: 500,
+        regular-weight: 400,
+      ),
+      density: 0,
+    ),
+    $overrides: (background: var(--bg-deep),
+      on-background: var(--text-main),
+      surface: rgba(13, 29, 43, 0.92),
+      surface-dim: rgba(8, 16, 25, 0.96),
+      surface-bright: rgba(18, 41, 63, 0.96),
+      surface-container-lowest: rgba(7, 16, 24, 0.98),
+      surface-container-low: rgba(11, 24, 36, 0.9),
+      surface-container: var(--bg-panel),
+      surface-container-high: rgba(18, 41, 63, 0.9),
+      surface-container-highest: rgba(15, 35, 55, 0.95),
+      on-surface: var(--text-main),
+      on-surface-variant: var(--text-muted),
+      primary: var(--accent),
+      on-primary: #04131a,
+      primary-container: rgba(57, 212, 180, 0.18),
+      on-primary-container: var(--text-main),
+      secondary: #8fc6ff,
+      on-secondary: #05111d,
+      secondary-container: rgba(34, 78, 115, 0.78),
+      on-secondary-container: #eaf5ff,
+      tertiary: #7fe7ff,
+      on-tertiary: #03141b,
+      tertiary-container: rgba(32, 107, 131, 0.74),
+      on-tertiary-container: #e6fbff,
+      error: var(--danger),
+      on-error: #22090d,
+      error-container: rgba(249, 111, 122, 0.2),
+      on-error-container: #ffdfe3,
+      outline: var(--line-strong),
+      outline-variant: var(--line),
+      shadow: rgba(0, 0, 0, 0.45),
+      scrim: rgba(0, 0, 0, 0.72),
+      surface-tint: var(--accent),
+      corner-small: 8px,
+      corner-medium: var(--radius-md),
+      corner-large: var(--radius-lg),
+      corner-extra-large: var(--radius-xl),
+      corner-full: 999px,
+    ));
+  @include mat.system-classes();
+}
+
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  background: var(--background-color);
-  color: var(--text-primary);
-  line-height: 1.5;
+  min-height: 100%;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(56, 145, 255, 0.24), transparent 38%),
+    radial-gradient(circle at 85% 0%, rgba(31, 225, 179, 0.15), transparent 35%),
+    linear-gradient(160deg, var(--bg-ink), var(--bg-deep));
+  font-family: 'Manrope', sans-serif;
 }
 
-/* You can add global styles to this file, and also import other style files */
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.surface {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.chip {
+  border: 1px solid var(--line);
+  background: var(--bg-panel-soft);
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+}
+
+.button-primary,
+.button-secondary,
+.button-danger {
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  transition:
+    transform 120ms ease,
+    border-color 120ms ease,
+    background-color 120ms ease;
+}
+
+.button-primary {
+  color: #04131a;
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+}
+
+.button-secondary {
+  color: var(--text-main);
+  border-color: var(--line-strong);
+  background: rgba(8, 18, 28, 0.7);
+}
+
+.button-danger {
+  color: #22090d;
+  background: linear-gradient(135deg, #ff9e8b, var(--danger));
+}
+
+.button-primary:hover,
+.button-secondary:hover,
+.button-danger:hover {
+  transform: translateY(-1px);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: rgba(4, 12, 20, 0.8);
+  color: var(--text-main);
+  border-radius: var(--radius-control);
+  padding: 0.62rem 0.8rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid rgba(8, 240, 190, 0.35);
+  border-color: rgba(8, 240, 190, 0.45);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.danger-text {
+  color: var(--danger);
+}
+
+.mat-mdc-button-base {
+  border-radius: var(--radius-control) !important;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mat-mdc-form-field .mdc-text-field {
+  border-radius: var(--radius-control) !important;
+}
+
+.mat-mdc-form-field .mdc-notched-outline__leading {
+  border-radius: var(--radius-control) 0 0 var(--radius-control) !important;
+}
+
+.mat-mdc-form-field .mdc-notched-outline__trailing {
+  border-radius: 0 var(--radius-control) var(--radius-control) 0 !important;
+}
+
+.mat-mdc-select-panel,
+.mat-mdc-menu-panel {
+  border-radius: var(--radius-control) !important;
+  border: 1px solid var(--line);
+  background: rgba(8, 20, 31, 0.96) !important;
+  backdrop-filter: blur(10px);
+}
+
+.mat-mdc-option .mdc-list-item__primary-text,
+.mat-mdc-menu-item .mat-mdc-menu-item-text {
+  color: var(--text-main);
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled),
+.mat-mdc-menu-item:hover:not([disabled]) {
+  background: rgba(17, 40, 60, 0.78) !important;
+}
+
+/* Icon utilities: use .icon on inline SVGs */
+.icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  vertical-align: middle;
+  color: var(--icon-color);
+  display: inline-block;
+}
+
+.icon--sm {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+
+.icon--md {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+.icon--lg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+/* For outline SVGs that use stroke=currentColor and fill=none, this ensures visible color */
+.icon path,
+.icon circle,
+.icon rect,
+.icon line,
+.icon polyline,
+.icon polygon {
+  stroke: currentColor;
+  fill: none;
+}
+
+/* For solid SVGs that use fill=currentColor, allow overriding via color */
+.icon[fill="currentColor"] {
+  fill: currentColor;
+}
