@@ -51,9 +51,13 @@ describe('TopNav', () => {
         signInProvider: '',
         signInSecondFactor: '',
       }),
-      reload: async () => {},
+      reload: async () => {
+        /* intentionally empty for test */
+      },
       toJSON: () => ({}),
-      delete: async () => {},
+      delete: async () => {
+        /* intentionally empty for test */
+      },
     };
     // Set the user signal BEFORE component creation
     authMock.user.set(mockUser);
