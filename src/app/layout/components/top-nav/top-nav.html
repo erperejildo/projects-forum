@@ -1,38 +1,58 @@
 <mat-toolbar class="surface nav-root">
-    <a class="brand" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-        <span class="brand-dot"></span>
-        <div>
-            <strong>Apps Forum</strong>
-            <p>{{ 'nav.subtitle' | translate }}</p>
-        </div>
-    </a>
-
-    <nav class="nav-links" role="navigation">
-        <a mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-            {{ 'nav.home' | translate }}
-        </a>
-    </nav>
-
-    <div class="actions">
-        <app-language-switcher></app-language-switcher>
-
-        @if (authService.isAuthenticated()) {
-        <div class="identity-row">
-            <div class="identity-value">{{ authService.displayName() }}</div>
-            <button mat-stroked-button class="btn-style2 header-action-control" type="button" (click)="signOut()">
-                {{ 'auth.signOut' | translate }}
-            </button>
-        </div>
-        } @else {
-        <button mat-flat-button class="btn-style1 header-action-control" type="button" (click)="toggleAuthPanel()">
-            {{ 'auth.signIn' | translate }}
-        </button>
-        }
+  <a
+    class="brand"
+    routerLink="/"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <span class="brand-dot"></span>
+    <div>
+      <strong>Apps Forum</strong>
+      <p>{{ 'nav.subtitle' | translate }}</p>
     </div>
+  </a>
+
+  <nav class="nav-links" role="navigation">
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ 'nav.home' | translate }}
+    </a>
+  </nav>
+
+  <div class="actions">
+    <app-language-switcher></app-language-switcher>
+
+    @if (authService.isAuthenticated()) {
+      <div class="identity-row">
+        <div class="identity-value">{{ authService.displayName() }}</div>
+        <button
+          mat-stroked-button
+          class="btn-style2 header-action-control"
+          type="button"
+          (click)="signOut()"
+        >
+          {{ 'auth.signOut' | translate }}
+        </button>
+      </div>
+    } @else {
+      <button
+        mat-flat-button
+        class="btn-style1 header-action-control"
+        type="button"
+        (click)="toggleAuthPanel()"
+      >
+        {{ 'auth.signIn' | translate }}
+      </button>
+    }
+  </div>
 </mat-toolbar>
 
 @if (showAuthPanel()) {
-<section class="auth-panel-wrap surface">
+  <section class="auth-panel-wrap surface">
     <app-auth-panel (closed)="closeAuthPanel()"></app-auth-panel>
-</section>
+  </section>
 }

@@ -8,4 +8,4 @@ import { TopNav } from './layout/components/top-nav/top-nav';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App { }
+export class App {}

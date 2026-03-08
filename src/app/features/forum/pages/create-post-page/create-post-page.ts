@@ -14,7 +14,16 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-create-post-page',
-  imports: [ReactiveFormsModule, TranslatePipe, TagInput, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatCardModule],
+  imports: [
+    ReactiveFormsModule,
+    TranslatePipe,
+    TagInput,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatCardModule,
+  ],
   templateUrl: './create-post-page.html',
   styleUrl: './create-post-page.scss',
 })

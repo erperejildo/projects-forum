@@ -1,55 +1,91 @@
 @if (loading()) {
-<p class="muted">{{ 'common.loading' | translate }}</p>
+  <p class="muted">{{ 'common.loading' | translate }}</p>
 } @else if (!post()) {
-<p class="muted">{{ 'post.notFound' | translate }}</p>
+  <p class="muted">{{ 'post.notFound' | translate }}</p>
 } @else {
-<app-post-card [post]="post()!" [projectName]="projectName(post()!.projectId)" [liked]="liked()"
-    [likeDisabled]="busy()" [interactive]="false" [useProjectedBody]="editingPost()" (likeToggle)="onLikeToggle()">
+  <app-post-card
+    [post]="post()!"
+    [projectName]="projectName(post()!.projectId)"
+    [liked]="liked()"
+    [likeDisabled]="busy()"
+    [interactive]="false"
+    [useProjectedBody]="editingPost()"
+    (likeToggle)="onLikeToggle()"
+  >
     @if (editingPost()) {
-    <div post-card-body class="post-editor">
-        <textarea [value]="postDraft()" [disabled]="busy()" (input)="onPostDraftChange($event)"></textarea>
+      <div post-card-body class="post-editor">
+        <textarea
+          [value]="postDraft()"
+          [disabled]="busy()"
+          (input)="onPostDraftChange($event)"
+        ></textarea>
         <div class="editor-actions">
-            <button mat-stroked-button class="btn-style2" type="button" [disabled]="busy()" (click)="cancelPostEdit()">
-                {{ 'common.cancel' | translate }}
-            </button>
-            <button mat-flat-button color="primary" class="btn-style1" type="button" [disabled]="busy()"
-                (click)="savePostEdit()">
-                {{ 'common.save' | translate }}
-            </button>
+          <button
+            mat-stroked-button
+            class="btn-style2"
+            type="button"
+            [disabled]="busy()"
+            (click)="cancelPostEdit()"
+          >
+            {{ 'common.cancel' | translate }}
+          </button>
+          <button
+            mat-flat-button
+            color="primary"
+            class="btn-style1"
+            type="button"
+            [disabled]="busy()"
+            (click)="savePostEdit()"
+          >
+            {{ 'common.save' | translate }}
+          </button>
         </div>
-    </div>
+      </div>
     }
 
     @if (canManagePost()) {
-    <div post-card-actions class="detail-actions">
+      <div post-card-actions class="detail-actions">
         <!-- Subscription button hidden until feature is implemented
         <button class="button-secondary" type="button" hidden [disabled]="busy()" (click)="onSubscriptionToggle()">
             {{ subscribed() ? ('post.unsubscribe' | translate) : ('post.subscribe' | translate) }}
         </button>
         -->
-        <button mat-icon-button type="button" class="kebab-trigger" [disabled]="busy()"
-            [matMenuTriggerFor]="postActionsMenu" aria-label="Post actions">
-            <mat-icon>more_vert</mat-icon>
+        <button
+          mat-icon-button
+          type="button"
+          class="kebab-trigger"
+          [disabled]="busy()"
+          [matMenuTriggerFor]="postActionsMenu"
+          aria-label="Post actions"
+        >
+          <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #postActionsMenu="matMenu" class="post-actions-menu" xPosition="before">
-            @if (canEditPost()) {
+          @if (canEditPost()) {
             <button mat-menu-item type="button" [disabled]="busy()" (click)="startPostEdit()">
-                {{ 'common.edit' | translate }}
+              {{ 'common.edit' | translate }}
             </button>
-            }
-            <button mat-menu-item type="button" [disabled]="busy()" (click)="deletePost()">
-                {{ 'common.delete' | translate }}
-            </button>
+          }
+          <button mat-menu-item type="button" [disabled]="busy()" (click)="deletePost()">
+            {{ 'common.delete' | translate }}
+          </button>
         </mat-menu>
-    </div>
+      </div>
     }
-</app-post-card>
+  </app-post-card>
 
-<app-reply-list [replies]="replies()" [canReply]="authService.isAuthenticated()" [submitting]="busy()"
-    [currentUserId]="currentUserId()" [isAdmin]="authService.isAdmin()" (replySubmitted)="onReplySubmitted($event)"
-    (replyUpdated)="onReplyUpdated($event)" (replyDeleted)="onReplyDeleted($event)"></app-reply-list>
+  <app-reply-list
+    [replies]="replies()"
+    [canReply]="authService.isAuthenticated()"
+    [submitting]="busy()"
+    [currentUserId]="currentUserId()"
+    [isAdmin]="authService.isAdmin()"
+    (replySubmitted)="onReplySubmitted($event)"
+    (replyUpdated)="onReplyUpdated($event)"
+    (replyDeleted)="onReplyDeleted($event)"
+  ></app-reply-list>
 
-@if (errorMessage()) {
-<p class="danger-text">{{ errorMessage() }}</p>
-}
+  @if (errorMessage()) {
+    <p class="danger-text">{{ errorMessage() }}</p>
+  }
 }

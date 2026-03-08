@@ -1,37 +1,37 @@
 {
-    "indexes": [
+  "indexes": [
+    {
+      "collectionGroup": "posts",
+      "queryScope": "COLLECTION",
+      "fields": [
         {
-            "collectionGroup": "posts",
-            "queryScope": "COLLECTION",
-            "fields": [
-                {
-                    "fieldPath": "projectId",
-                    "order": "ASCENDING"
-                },
-                {
-                    "fieldPath": "createdAt",
-                    "order": "DESCENDING"
-                }
-            ]
+          "fieldPath": "projectId",
+          "order": "ASCENDING"
         },
         {
-            "collectionGroup": "posts",
-            "queryScope": "COLLECTION",
-            "fields": [
-                {
-                    "fieldPath": "projectId",
-                    "order": "ASCENDING"
-                },
-                {
-                    "fieldPath": "likesCount",
-                    "order": "DESCENDING"
-                },
-                {
-                    "fieldPath": "createdAt",
-                    "order": "DESCENDING"
-                }
-            ]
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
         }
-    ],
-    "fieldOverrides": []
+      ]
+    },
+    {
+      "collectionGroup": "posts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "projectId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "likesCount",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
 }

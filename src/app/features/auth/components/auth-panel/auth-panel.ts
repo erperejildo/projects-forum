@@ -1,5 +1,11 @@
 import { Component, inject, output, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Auth } from '../../../../core/services/auth';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +18,15 @@ type AuthMode = 'sign-in' | 'register';
 
 @Component({
   selector: 'app-auth-panel',
-  imports: [ReactiveFormsModule, TranslatePipe, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatIconModule],
+  imports: [
+    ReactiveFormsModule,
+    TranslatePipe,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+  ],
   templateUrl: './auth-panel.html',
   styleUrl: './auth-panel.scss',
 })
@@ -40,7 +54,7 @@ export class AuthPanel {
       }),
     },
     // group-level validator applied conditionally inside updateFormForMode
-    this.passwordsMatchValidator.bind(this)
+    this.passwordsMatchValidator.bind(this),
   );
 
   setMode(mode: AuthMode): void {
@@ -64,7 +78,9 @@ export class AuthPanel {
     this.form.controls.confirmPassword.updateValueAndValidity();
 
     // the group-level validator already checks mismatch only when in register
-    this.form.setValidators(this.mode() === 'register' ? this.passwordsMatchValidator.bind(this) : null);
+    this.form.setValidators(
+      this.mode() === 'register' ? this.passwordsMatchValidator.bind(this) : null,
+    );
     this.form.updateValueAndValidity();
   }
 

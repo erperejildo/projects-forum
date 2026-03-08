@@ -1,39 +1,53 @@
-<mat-card class="post-card surface" [class.post-card--interactive]="interactive()"
-    [attr.role]="interactive() ? 'link' : null" [attr.tabindex]="interactive() ? 0 : null" (click)="onCardClick()"
-    (keydown)="onCardKeydown($event)">
-    <mat-card-content class="post-card-content">
-        <header class="card-header">
-            <div class="meta">
-                <span class="chip">{{ projectName() || post().projectId }}</span>
-                <span class="chip type" [class.issue]="post().type === 'issue'">{{ 'post.' + post().type | translate
-                    }}</span>
-                <time>{{ post().createdAt | date: dateFormat() }}</time>
-            </div>
+<mat-card
+  class="post-card surface"
+  [class.post-card--interactive]="interactive()"
+  [attr.role]="interactive() ? 'link' : null"
+  [attr.tabindex]="interactive() ? 0 : null"
+  (click)="onCardClick()"
+  (keydown)="onCardKeydown($event)"
+>
+  <mat-card-content class="post-card-content">
+    <header class="card-header">
+      <div class="meta">
+        <span class="chip">{{ projectName() || post().projectId }}</span>
+        <span class="chip type" [class.issue]="post().type === 'issue'">{{
+          'post.' + post().type | translate
+        }}</span>
+        <time>{{ post().createdAt | date: dateFormat() }}</time>
+      </div>
 
-            <div class="header-actions" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
-                <app-like-button [liked]="liked()" [likesCount]="post().likesCount" [disabled]="likeDisabled()"
-                    (toggled)="onLikeClick()"></app-like-button>
-                <ng-content select="[post-card-actions]"></ng-content>
-            </div>
-        </header>
+      <div
+        class="header-actions"
+        (click)="$event.stopPropagation()"
+        (keydown)="$event.stopPropagation()"
+      >
+        <app-like-button
+          [liked]="liked()"
+          [likesCount]="post().likesCount"
+          [disabled]="likeDisabled()"
+          (toggled)="onLikeClick()"
+        ></app-like-button>
+        <ng-content select="[post-card-actions]"></ng-content>
+      </div>
+    </header>
 
-        @if (useProjectedBody()) {
-        <ng-content select="[post-card-body]"></ng-content>
-        } @else {
-        <p class="message">{{ displayMessage() }}</p>
+    @if (useProjectedBody()) {
+      <ng-content select="[post-card-body]"></ng-content>
+    } @else {
+      <p class="message">{{ displayMessage() }}</p>
+    }
+
+    @if (post().tags.length) {
+      <div class="tags-row">
+        @for (tag of post().tags; track tag) {
+          <span class="chip">#{{ tag }}</span>
         }
+      </div>
+    }
 
-        @if (post().tags.length) {
-        <div class="tags-row">
-            @for (tag of post().tags; track tag) {
-            <span class="chip">#{{ tag }}</span>
-            }
-        </div>
-        }
-
-        <footer class="card-footer muted">
-            <span>{{ post().replyCount }} {{ 'post.replies' | translate }}</span>
-            <span>{{ 'post.by' | translate }} {{ post().authorDisplayName }}</span>
-        </footer>
-    </mat-card-content>
+    <footer class="card-footer muted">
+      <span>{{ post().replyCount }} {{ 'post.replies' | translate }}</span>
+      <span>{{ 'post.by' | translate }} {{ post().authorDisplayName }}</span>
+    </footer>
+  </mat-card-content>
 </mat-card>

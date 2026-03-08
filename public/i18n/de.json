@@ -1,85 +1,85 @@
 {
-    "nav": {
-        "subtitle": "Community-Support fur deine Apps",
-        "home": "Start",
-        "createPost": "Beitrag erstellen",
-        "language": "Sprache",
-        "account": "Konto"
-    },
-    "auth": {
-        "signIn": "Anmelden",
-        "signOut": "Abmelden",
-        "register": "Registrieren",
-        "email": "E-Mail",
-        "password": "Passwort",
-        "continueWithGoogle": "Mit Google fortfahren",
-        "emailRequired": "E-Mail ist erforderlich",
-        "emailInvalid": "Bitte gib eine gültige E-Mail-Adresse ein",
-        "passwordRequired": "Passwort ist erforderlich",
-        "passwordMinLength": "Das Passwort muss mindestens {{min}} Zeichen lang sein"
-    },
-    "common": {
-        "close": "Schliessen",
-        "add": "Hinzufugen",
-        "cancel": "Abbrechen",
-        "edit": "Bearbeiten",
-        "delete": "Löschen",
-        "save": "Speichern",
-        "loading": "Ladt..."
-    },
-    "home": {
-        "title": "Fragen und Feedback an einem Ort",
-        "subtitle": "Probleme durchsuchen, Fragen stellen und anderen in deinen Projekten helfen.",
-        "askButton": "Hilfe anfragen",
-        "fallbackProjectsNotice": "Lokale Projektliste wird verwendet, bis Firestore-Projekte verfugbar sind.",
-        "noPosts": "Keine Beitrage fur die aktuellen Filter."
-    },
-    "filters": {
-        "search": "Suche",
-        "searchPlaceholder": "Nach Text oder Autor suchen",
-        "project": "Projekt",
-        "allProjects": "Alle Projekte",
-        "tag": "Beliebte Tags",
-        "allTags": "Alle Tags",
-        "order": "Sortierung",
-        "orderDate": "Neueste",
-        "orderPopularity": "Beliebteste",
-        "orderLikes": "Meiste Likes"
-    },
-    "post": {
-        "question": "Frage",
-        "issue": "Problem",
-        "likes": "Likes",
-        "replies": "Antworten",
-        "unlike": "Like entfernen",
-        "subscribe": "Abonnieren",
-        "liked": "Gemocht",
-        "unsubscribe": "Abo beenden",
-        "by": "Von",
-        "noReplies": "Noch keine Antworten.",
-        "replyPlaceholder": "Antwort schreiben",
-        "addReply": "Antwort hinzufugen",
-        "editPost": "Beitrag bearbeiten",
-        "deletePost": "Beitrag loschen",
-        "editReply": "Antwort bearbeiten",
-        "deleteReply": "Antwort loschen",
-        "confirmDeletePost": "Sind Sie sicher, dass Sie diesen Beitrag löschen möchten?",
-        "confirmDeleteReply": "Sind Sie sicher, dass Sie diese Antwort löschen möchten?",
-        "replyRequiresAuth": "Zum Antworten bitte anmelden.",
-        "replyRequired": "Antwort darf nicht leer sein",
-        "notFound": "Dieser Beitrag wurde nicht gefunden."
-    },
-    "create": {
-        "title": "Neuen Beitrag erstellen",
-        "subtitle": "Projekt auswahlen, Beitragstyp festlegen und Details angeben.",
-        "project": "Projekt",
-        "type": "Beitragstyp",
-        "message": "Nachricht",
-        "messagePlaceholder": "Beschreibe deine Frage oder dein Problem",
-        "tags": "Tags",
-        "tagsPlaceholder": "Tag eingeben und Enter drucken",
-        "messageRequired": "Nachricht ist erforderlich",
-        "messageMinLength": "Die Nachricht muss mindestens {{min}} Zeichen lang sein",
-        "submit": "Beitrag veroffentlichen"
-    }
+  "nav": {
+    "subtitle": "Community-Support fur deine Apps",
+    "home": "Start",
+    "createPost": "Beitrag erstellen",
+    "language": "Sprache",
+    "account": "Konto"
+  },
+  "auth": {
+    "signIn": "Anmelden",
+    "signOut": "Abmelden",
+    "register": "Registrieren",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "continueWithGoogle": "Mit Google fortfahren",
+    "emailRequired": "E-Mail ist erforderlich",
+    "emailInvalid": "Bitte gib eine gültige E-Mail-Adresse ein",
+    "passwordRequired": "Passwort ist erforderlich",
+    "passwordMinLength": "Das Passwort muss mindestens {{min}} Zeichen lang sein"
+  },
+  "common": {
+    "close": "Schliessen",
+    "add": "Hinzufugen",
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "save": "Speichern",
+    "loading": "Ladt..."
+  },
+  "home": {
+    "title": "Fragen und Feedback an einem Ort",
+    "subtitle": "Probleme durchsuchen, Fragen stellen und anderen in deinen Projekten helfen.",
+    "askButton": "Hilfe anfragen",
+    "fallbackProjectsNotice": "Lokale Projektliste wird verwendet, bis Firestore-Projekte verfugbar sind.",
+    "noPosts": "Keine Beitrage fur die aktuellen Filter."
+  },
+  "filters": {
+    "search": "Suche",
+    "searchPlaceholder": "Nach Text oder Autor suchen",
+    "project": "Projekt",
+    "allProjects": "Alle Projekte",
+    "tag": "Beliebte Tags",
+    "allTags": "Alle Tags",
+    "order": "Sortierung",
+    "orderDate": "Neueste",
+    "orderPopularity": "Beliebteste",
+    "orderLikes": "Meiste Likes"
+  },
+  "post": {
+    "question": "Frage",
+    "issue": "Problem",
+    "likes": "Likes",
+    "replies": "Antworten",
+    "unlike": "Like entfernen",
+    "subscribe": "Abonnieren",
+    "liked": "Gemocht",
+    "unsubscribe": "Abo beenden",
+    "by": "Von",
+    "noReplies": "Noch keine Antworten.",
+    "replyPlaceholder": "Antwort schreiben",
+    "addReply": "Antwort hinzufugen",
+    "editPost": "Beitrag bearbeiten",
+    "deletePost": "Beitrag loschen",
+    "editReply": "Antwort bearbeiten",
+    "deleteReply": "Antwort loschen",
+    "confirmDeletePost": "Sind Sie sicher, dass Sie diesen Beitrag löschen möchten?",
+    "confirmDeleteReply": "Sind Sie sicher, dass Sie diese Antwort löschen möchten?",
+    "replyRequiresAuth": "Zum Antworten bitte anmelden.",
+    "replyRequired": "Antwort darf nicht leer sein",
+    "notFound": "Dieser Beitrag wurde nicht gefunden."
+  },
+  "create": {
+    "title": "Neuen Beitrag erstellen",
+    "subtitle": "Projekt auswahlen, Beitragstyp festlegen und Details angeben.",
+    "project": "Projekt",
+    "type": "Beitragstyp",
+    "message": "Nachricht",
+    "messagePlaceholder": "Beschreibe deine Frage oder dein Problem",
+    "tags": "Tags",
+    "tagsPlaceholder": "Tag eingeben und Enter drucken",
+    "messageRequired": "Nachricht ist erforderlich",
+    "messageMinLength": "Die Nachricht muss mindestens {{min}} Zeichen lang sein",
+    "submit": "Beitrag veroffentlichen"
+  }
 }

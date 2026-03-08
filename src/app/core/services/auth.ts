@@ -26,8 +26,8 @@ export class Auth {
       return '';
     }
 
-        // For the designated admin account (from environment), show a generic "Admin" label
-        if (currentUser.email === environment.forum.adminEmail) {
+    // For the designated admin account (from environment), show a generic "Admin" label
+    if (currentUser.email === environment.forum.adminEmail) {
       return 'Admin';
     }
 

@@ -69,4 +69,5 @@ describe('AuthPanel', () => {
     component.form.controls.confirmPassword.setValue('foo');
     component.setMode('sign-in');
     expect(component.form.controls.confirmPassword.value).toBe('');
-  });});
+  });
+});

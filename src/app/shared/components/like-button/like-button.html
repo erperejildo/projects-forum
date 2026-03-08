@@ -1,6 +1,13 @@
-<button mat-flat-button class="btn-style1 like-button-control" type="button" [disabled]="disabled()"
-    [class.is-liked]="liked()" [attr.aria-pressed]="liked()"
-    [attr.aria-label]="liked() ? 'Unlike' : 'Like'" (click)="onToggle($event)">
-    <mat-icon>{{ liked() ? 'favorite' : 'favorite_border' }}</mat-icon>
-    <span class="like-count">{{ likesCount() }}</span>
+<button
+  mat-flat-button
+  class="btn-style1 like-button-control"
+  type="button"
+  [disabled]="disabled()"
+  [class.is-liked]="liked()"
+  [attr.aria-pressed]="liked()"
+  [attr.aria-label]="liked() ? 'Unlike' : 'Like'"
+  (click)="onToggle($event)"
+>
+  <mat-icon>{{ liked() ? 'favorite' : 'favorite_border' }}</mat-icon>
+  <span class="like-count">{{ likesCount() }}</span>
 </button>

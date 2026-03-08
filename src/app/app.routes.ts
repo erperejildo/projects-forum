@@ -5,21 +5,21 @@ import { HomePage } from './features/forum/pages/home-page/home-page';
 import { PostDetailPage } from './features/forum/pages/post-detail-page/post-detail-page';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: HomePage,
-    },
-    {
-        path: 'post/:id',
-        component: PostDetailPage,
-    },
-    {
-        path: 'create',
-        component: CreatePostPage,
-        canActivate: [authRequiredGuard],
-    },
-    {
-        path: '**',
-        redirectTo: '',
-    },
+  {
+    path: '',
+    component: HomePage,
+  },
+  {
+    path: 'post/:id',
+    component: PostDetailPage,
+  },
+  {
+    path: 'create',
+    component: CreatePostPage,
+    canActivate: [authRequiredGuard],
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
