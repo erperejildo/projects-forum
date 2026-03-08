@@ -5,7 +5,8 @@ model: GPT-4.1 (copilot)
 
 # PR Command Automation Prompt
 
-Execute the following workflow using Gitlab's MCP:
+First, run npm run format to prettier all files.
+Then, execute the following workflow using Gitlab's MCP:
 
 1. Create a new branch with a simple, descriptive name related to the uncommitted changes and check it out.
 2. Add all changed files.
