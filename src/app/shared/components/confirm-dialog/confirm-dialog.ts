@@ -16,7 +16,7 @@ export interface ConfirmDialogData {
 })
 export class ConfirmDialog {
   private readonly dialogRef = inject(MatDialogRef<ConfirmDialog>);
-  readonly data = inject<ConfirmDialogData>(MAT_DIALOG_DATA as any);
+  readonly data = inject<ConfirmDialogData>(MAT_DIALOG_DATA);
 
   confirm(): void {
     this.dialogRef.close(true);

@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideUiTesting } from '../../../../testing/testing-providers';
-import { of } from 'rxjs';
 
 import { ReplyList } from './reply-list';
-import * as confirmModule from '../../../../shared/components/confirm-dialog/confirm-dialog';
 import { setConfirmDialogHandler } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
 describe('ReplyList', () => {
@@ -32,7 +30,7 @@ describe('ReplyList', () => {
   it('kebab trigger styles match material (no border/background)', async () => {
     // provide a reply with manage permissions so kebab appears
     // set input value instead of manipulating the signal directly
-    const sampleReply: any = {
+    const sampleReply = {
       id: 'r1',
       authorDisplayName: 'Test',
       authorId: 'u1',
@@ -46,8 +44,8 @@ describe('ReplyList', () => {
     };
     fixture.componentRef.setInput('replies', [sampleReply]);
     // override permission methods to avoid needing spyOn/type definitions
-    component.canManageReply = (reply: any) => true;
-    component.canEditReply = (reply: any) => true;
+    component.canManageReply = () => true;
+    component.canEditReply = () => true;
     fixture.detectChanges();
     await fixture.whenStable();
 
@@ -61,7 +59,7 @@ describe('ReplyList', () => {
 
   it('deleteReply shows confirmation and emits only when confirmed', async () => {
     let emitted = false;
-    (component.replyDeleted as any).emit = () => {
+    (component.replyDeleted as unknown as { emit: (value: string) => void }).emit = () => {
       emitted = true;
     };
 
@@ -76,7 +74,7 @@ describe('ReplyList', () => {
 
   it('submit() does not emit when draft blank', () => {
     let emitted = false;
-    (component.replySubmitted as any).emit = () => {
+    (component.replySubmitted as unknown as { emit: (value: string) => void }).emit = () => {
       emitted = true;
     };
 

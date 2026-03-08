@@ -33,9 +33,9 @@ describe('TopNav', () => {
       uid: 'u',
       displayName: 'User',
       email: 'u@example.com',
-    } as any);
+    });
     // also flip the explicit authenticated signal on the mock
-    (component.authService.isAuthenticated as any).set(true);
+    (component.authService.isAuthenticated as { set: (v: boolean) => void }).set(true);
     fixture.detectChanges();
     await fixture.whenStable();
 

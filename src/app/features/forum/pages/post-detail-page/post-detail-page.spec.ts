@@ -11,7 +11,7 @@ import {
   provideUiTesting,
 } from '../../../../testing/testing-providers';
 
-import * as confirmModule from '../../../../shared/components/confirm-dialog/confirm-dialog';
+// ...existing code...
 import { setConfirmDialogHandler } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
 import { PostDetailPage } from './post-detail-page';
@@ -94,7 +94,7 @@ describe('PostDetailPage', () => {
     const router = TestBed.inject(Router);
     const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
 
-    (forumMock as any).softDeletePost = async () => {
+    (forumMock as unknown as Forum).softDeletePost = async () => {
       deletedCalled = true;
     };
 
