@@ -20,18 +20,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    env:
-      FORUM_FIREBASE_API_KEY: ${{ secrets.FORUM_FIREBASE_API_KEY }}
-      FORUM_FIREBASE_AUTH_DOMAIN: ${{ secrets.FORUM_FIREBASE_AUTH_DOMAIN }}
-      FORUM_FIREBASE_PROJECT_ID: ${{ secrets.FORUM_FIREBASE_PROJECT_ID }}
-      FORUM_FIREBASE_STORAGE_BUCKET: ${{ secrets.FORUM_FIREBASE_STORAGE_BUCKET }}
-      FORUM_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FORUM_FIREBASE_MESSAGING_SENDER_ID }}
-      FORUM_FIREBASE_APP_ID: ${{ secrets.FORUM_FIREBASE_APP_ID }}
-      FORUM_FIREBASE_MEASUREMENT_ID: ${{ secrets.FORUM_FIREBASE_MEASUREMENT_ID }}
-      FORUM_DEFAULT_PROJECT: ${{ secrets.FORUM_DEFAULT_PROJECT }}
-      FORUM_PROJECTS: ${{ secrets.FORUM_PROJECTS }}
-      FORUM_ADMIN_EMAIL: ${{ secrets.FORUM_ADMIN_EMAIL }}
-      FORUM_MAIL_COLLECTION: ${{ secrets.FORUM_MAIL_COLLECTION }}
 
     steps:
       - name: Checkout
@@ -48,6 +36,18 @@ jobs:
 
       - name: Generate environment.ts
         run: node scripts/generate-environment.mjs
+        env:
+          FORUM_FIREBASE_API_KEY: ${{ secrets.FORUM_FIREBASE_API_KEY }}
+          FORUM_FIREBASE_AUTH_DOMAIN: ${{ secrets.FORUM_FIREBASE_AUTH_DOMAIN }}
+          FORUM_FIREBASE_PROJECT_ID: ${{ secrets.FORUM_FIREBASE_PROJECT_ID }}
+          FORUM_FIREBASE_STORAGE_BUCKET: ${{ secrets.FORUM_FIREBASE_STORAGE_BUCKET }}
+          FORUM_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FORUM_FIREBASE_MESSAGING_SENDER_ID }}
+          FORUM_FIREBASE_APP_ID: ${{ secrets.FORUM_FIREBASE_APP_ID }}
+          FORUM_FIREBASE_MEASUREMENT_ID: ${{ secrets.FORUM_FIREBASE_MEASUREMENT_ID }}
+          FORUM_DEFAULT_PROJECT: ${{ secrets.FORUM_DEFAULT_PROJECT }}
+          FORUM_PROJECTS: ${{ secrets.FORUM_PROJECTS }}
+          FORUM_ADMIN_EMAIL: ${{ secrets.FORUM_ADMIN_EMAIL }}
+          FORUM_MAIL_COLLECTION: ${{ secrets.FORUM_MAIL_COLLECTION }}
 
       - name: Run quality checks
         run: |
@@ -57,6 +57,18 @@ jobs:
 
       - name: Build for GitHub Pages
         run: npm run build -- --configuration production --base-href "/${{ github.event.repository.name }}/"
+        env:
+          FORUM_FIREBASE_API_KEY: ${{ secrets.FORUM_FIREBASE_API_KEY }}
+          FORUM_FIREBASE_AUTH_DOMAIN: ${{ secrets.FORUM_FIREBASE_AUTH_DOMAIN }}
+          FORUM_FIREBASE_PROJECT_ID: ${{ secrets.FORUM_FIREBASE_PROJECT_ID }}
+          FORUM_FIREBASE_STORAGE_BUCKET: ${{ secrets.FORUM_FIREBASE_STORAGE_BUCKET }}
+          FORUM_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FORUM_FIREBASE_MESSAGING_SENDER_ID }}
+          FORUM_FIREBASE_APP_ID: ${{ secrets.FORUM_FIREBASE_APP_ID }}
+          FORUM_FIREBASE_MEASUREMENT_ID: ${{ secrets.FORUM_FIREBASE_MEASUREMENT_ID }}
+          FORUM_DEFAULT_PROJECT: ${{ secrets.FORUM_DEFAULT_PROJECT }}
+          FORUM_PROJECTS: ${{ secrets.FORUM_PROJECTS }}
+          FORUM_ADMIN_EMAIL: ${{ secrets.FORUM_ADMIN_EMAIL }}
+          FORUM_MAIL_COLLECTION: ${{ secrets.FORUM_MAIL_COLLECTION }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
