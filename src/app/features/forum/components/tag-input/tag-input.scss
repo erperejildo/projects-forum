@@ -7,8 +7,27 @@
     display: flex;
     gap: 0.4rem;
     flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 0.8rem; /* Adds gap between tags and input */
 }
 
 .tag-chip {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 1.2rem;
+    background: var(--chip-bg, #222a36);
+    border: none;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    margin-left: 0.2rem;
 }

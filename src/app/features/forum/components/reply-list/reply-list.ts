@@ -50,6 +50,14 @@ export class ReplyList {
   readonly canSubmit = computed(() => !!this.draft().trim());
   readonly canSave = computed(() => !!this.editDraft().trim());
 
+  markDraftTouched(): void {
+    this.draftTouched.set(true);
+  }
+
+  markEditTouched(): void {
+    this.editTouched.set(true);
+  }
+
   onDraftChange(event: Event): void {
     const value = (event.target as HTMLTextAreaElement).value;
     this.draft.set(value);
@@ -89,6 +97,7 @@ export class ReplyList {
 
     this.editingReplyId.set(reply.id);
     this.editDraft.set(reply.message);
+    this.editTouched.set(false);
   }
 
   onEditDraftChange(event: Event): void {
@@ -101,6 +110,7 @@ export class ReplyList {
   cancelReplyEdit(): void {
     this.editingReplyId.set('');
     this.editDraft.set('');
+    this.editTouched.set(false);
   }
 
   saveReplyEdit(replyId: string): void {

@@ -1,6 +1,7 @@
 .replies {
     display: grid;
     gap: 0.8rem;
+    margin-top: 1rem;
 }
 
 .thread {
@@ -59,6 +60,16 @@
     gap: 0.65rem;
 }
 
+.composer-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.validation-message {
+    margin: -0.15rem 0 0;
+    font-size: 0.82rem;
+}
+
 :is(.composer-field, .editor-field) {
     .mdc-text-field {
         background: transparent;
@@ -66,19 +77,5 @@
 
     .mat-mdc-input-element {
         color: var(--text-main);
-    }
-}
-
-.reply-submit {
-    border-radius: var(--radius-control);
-    min-height: 42px;
-    font-weight: 700;
-    color: #04131a !important;
-    background: linear-gradient(135deg, var(--accent-strong), var(--accent)) !important;
-
-    &:hover:not(:disabled) {
-        color: #04131a !important;
-        background: linear-gradient(135deg, var(--accent-strong), var(--accent)) !important;
-        filter: brightness(1.03);
     }
 }

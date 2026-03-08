@@ -70,5 +70,8 @@ export class TopNav {
 
   async signOut(): Promise<void> {
     await this.authService.signOut();
+    await this.router.navigateByUrl('/', {
+      replaceUrl: true,
+    });
   }
 }

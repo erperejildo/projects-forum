@@ -20,13 +20,7 @@
 }
 
 .ask-help-button {
-    /* reuse header-action-control for border/size, but keep local tweaks if needed */
-    border-radius: var(--radius-control);
-    min-height: 38px;
-    /* match sign-in/header-action-control */
-    font-weight: 700;
-    /* let the Material `mat-flat-button` use theme colors just like the
-       sign-in button; overrides removed */
+    align-self: center;
 }
 
 .posts-list {

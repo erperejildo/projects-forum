@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class HomePage {
   readonly authService = inject(Auth);
   readonly forumService = inject(Forum);
+  readonly postMessagePreviewLength = 240;
 
   readonly loading = signal(true);
   readonly errorMessage = signal('');

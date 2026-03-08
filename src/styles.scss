@@ -139,27 +139,38 @@ select {
 
 .button-primary,
 .button-secondary,
-.button-danger {
+.button-danger,
+.btn-style1,
+.btn-style2 {
   border: 1px solid transparent;
   border-radius: var(--radius-control);
   cursor: pointer;
   padding: 0.6rem 1rem;
   font-weight: 700;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   transition:
     transform 120ms ease,
     border-color 120ms ease,
-    background-color 120ms ease;
+    background-color 120ms ease,
+    filter 120ms ease;
 }
 
-.button-primary {
+.button-primary,
+.btn-style1 {
   color: #04131a;
   background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  box-shadow: 0 12px 28px rgba(8, 240, 190, 0.15);
 }
 
-.button-secondary {
+.button-secondary,
+.btn-style2 {
   color: var(--text-main);
   border-color: var(--line-strong);
-  background: rgba(8, 18, 28, 0.7);
+  background: rgba(6, 15, 25, 0.75);
 }
 
 .button-danger {
@@ -169,8 +180,60 @@ select {
 
 .button-primary:hover,
 .button-secondary:hover,
-.button-danger:hover {
+.button-danger:hover,
+.btn-style1:hover:not(:disabled),
+.btn-style2:hover:not(:disabled) {
   transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+:is(.button-primary, .button-secondary, .button-danger, .btn-style1, .btn-style2):disabled {
+  cursor: default;
+  opacity: 0.58;
+  box-shadow: none;
+  filter: none;
+}
+
+.mat-mdc-button-base.btn-style1,
+.mat-mdc-button-base.btn-style2 {
+  border-radius: var(--radius-control) !important;
+  padding-inline: 1rem !important;
+}
+
+.mat-mdc-button-base.btn-style1 {
+  color: #04131a !important;
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent)) !important;
+}
+
+.mat-mdc-button-base.btn-style2 {
+  color: var(--text-main) !important;
+  border-color: var(--line-strong) !important;
+  background: rgba(6, 15, 25, 0.75) !important;
+}
+
+.btn-style1 .mat-icon,
+.btn-style2 .mat-icon {
+  margin: 0;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+}
+
+.header-action-control {
+  min-height: 40px;
+  border-radius: var(--radius-control) !important;
+}
+
+.mat-mdc-form-field.header-action-control {
+  margin: 0;
+}
+
+.mat-mdc-form-field.header-action-control .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.mat-mdc-form-field.header-action-control .mat-mdc-form-field-flex {
+  align-items: center;
 }
 
 input,

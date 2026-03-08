@@ -1,34 +1,39 @@
-<mat-card class="post-card surface" [routerLink]="['/post', post().id]">
-    <mat-card-header class="card-header">
-        <div class="header-main">
-            <div class="author">{{ post().authorDisplayName }}</div>
+<mat-card class="post-card surface" [class.post-card--interactive]="interactive()"
+    [attr.role]="interactive() ? 'link' : null" [attr.tabindex]="interactive() ? 0 : null" (click)="onCardClick()"
+    (keydown)="onCardKeydown($event)">
+    <mat-card-content class="post-card-content">
+        <header class="card-header">
             <div class="meta">
                 <span class="chip">{{ projectName() || post().projectId }}</span>
                 <span class="chip type" [class.issue]="post().type === 'issue'">{{ 'post.' + post().type | translate
                     }}</span>
-                <time>{{ post().createdAt | date: 'dd/MM/yy' }}</time>
+                <time>{{ post().createdAt | date: dateFormat() }}</time>
             </div>
-        </div>
 
-        <div class="header-actions">
-            <app-like-button [liked]="liked()" [likesCount]="post().likesCount" [disabled]="!canLike()"
-                (toggled)="onLikeClick()"></app-like-button>
-        </div>
-    </mat-card-header>
+            <div class="header-actions" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+                <app-like-button [liked]="liked()" [likesCount]="post().likesCount" [disabled]="likeDisabled()"
+                    (toggled)="onLikeClick()"></app-like-button>
+                <ng-content select="[post-card-actions]"></ng-content>
+            </div>
+        </header>
 
-    <mat-card-content>
-        <p>{{ post().message }}</p>
+        @if (useProjectedBody()) {
+        <ng-content select="[post-card-body]"></ng-content>
+        } @else {
+        <p class="message">{{ displayMessage() }}</p>
+        }
 
+        @if (post().tags.length) {
         <div class="tags-row">
             @for (tag of post().tags; track tag) {
             <span class="chip">#{{ tag }}</span>
             }
         </div>
-    </mat-card-content>
+        }
 
-    <mat-card-actions>
-        <div class="stats muted">
+        <footer class="card-footer muted">
             <span>{{ post().replyCount }} {{ 'post.replies' | translate }}</span>
-        </div>
-    </mat-card-actions>
+            <span>{{ 'post.by' | translate }} {{ post().authorDisplayName }}</span>
+        </footer>
+    </mat-card-content>
 </mat-card>
