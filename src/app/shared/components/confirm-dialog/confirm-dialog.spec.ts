@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { ConfirmDialog, ConfirmDialogData } from './confirm-dialog';
 // replicate the common ui testing providers inline to avoid import path issues
@@ -17,10 +17,10 @@ describe('ConfirmDialog', () => {
   let fixture: ComponentFixture<ConfirmDialog>;
   let dialogRef: Partial<MatDialogRef<ConfirmDialog>>;
 
-  let closeCalls: any[];
+  let closeCalls: unknown[];
   beforeEach(async () => {
     closeCalls = [];
-    dialogRef = { close: (...args: any[]) => closeCalls.push(args) };
+    dialogRef = { close: (...args: unknown[]) => closeCalls.push(args) };
 
     await TestBed.configureTestingModule({
       imports: [ConfirmDialog],
