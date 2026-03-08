@@ -97,6 +97,29 @@ Required variables:
 - `FORUM_ADMIN_EMAIL`
 - `FORUM_MAIL_COLLECTION`
 
+## GitHub Actions Environment Setup
+
+To deploy to GitHub Pages with custom environment values:
+
+1. Go to your repository → Settings → Secrets and variables → Actions.
+2. Add each required environment variable as a **repository secret** (not just as an environment variable):
+   - FORUM_FIREBASE_API_KEY
+   - FORUM_FIREBASE_AUTH_DOMAIN
+   - FORUM_FIREBASE_PROJECT_ID
+   - FORUM_FIREBASE_STORAGE_BUCKET
+   - FORUM_FIREBASE_MESSAGING_SENDER_ID
+   - FORUM_FIREBASE_APP_ID
+   - FORUM_FIREBASE_MEASUREMENT_ID
+   - FORUM_DEFAULT_PROJECT
+   - FORUM_PROJECTS
+   - FORUM_ADMIN_EMAIL
+   - FORUM_MAIL_COLLECTION
+3. The GitHub Actions workflow will inject these secrets into the build steps.
+4. The step `node scripts/generate-environment.mjs` will generate `src/environments/environment.ts` from these values.
+5. The build will use your custom values for Firebase and project dropdowns.
+
+**Note:** If you only set environment variables (not secrets), the workflow will not pick them up. Always use repository secrets for build-time values.
+
 ## Local Setup
 
 1. Install dependencies:
