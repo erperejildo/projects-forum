@@ -27,15 +27,42 @@ describe('TopNav', () => {
   });
 
   it('sign out uses secondary style class', async () => {
-    // Ensure auth mock reports a logged-in user so the button appears
-    // the computed isAuthenticated will flip automatically when user changes
-    component.authService.user.set({
+    // Mock a Firebase User object with required properties
+    const mockUser = {
       uid: 'u',
       displayName: 'User',
       email: 'u@example.com',
-    });
-    // also flip the explicit authenticated signal on the mock
-    (component.authService.isAuthenticated as { set: (v: boolean) => void }).set(true);
+      emailVerified: true,
+      isAnonymous: false,
+      metadata: { creationTime: '', lastSignInTime: '' },
+      providerData: [],
+      refreshToken: '',
+      tenantId: null,
+      phoneNumber: null,
+      photoURL: null,
+      providerId: 'firebase',
+      getIdToken: async () => '',
+      getIdTokenResult: async () => ({
+        claims: {},
+        token: '',
+        expirationTime: '',
+        authTime: '',
+        issuedAtTime: '',
+        signInProvider: '',
+        signInSecondFactor: '',
+      }),
+      reload: async () => {},
+      toJSON: () => ({}),
+      delete: async () => {},
+    };
+    // Set the user signal BEFORE component creation
+    authMock.user.set(mockUser);
+    fixture = TestBed.createComponent(TopNav);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    // Force another detectChanges in case signals update asynchronously
     fixture.detectChanges();
     await fixture.whenStable();
 

@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { signal } from '@angular/core';
+import { signal, computed } from '@angular/core';
 import { ActivatedRoute, convertToParamMap, provideRouter } from '@angular/router';
 import {
   provideTranslateLoader,
@@ -29,16 +29,19 @@ export const provideUiTesting = () => [
   }),
 ];
 
-export const createAuthMock = () => ({
-  user: signal<unknown>(null),
-  isAuthenticated: signal(false),
-  isAdmin: signal(false),
-  displayName: signal('Guest'),
-  signIn: async () => undefined,
-  signUp: async () => undefined,
-  signInWithGoogle: async () => undefined,
-  signOut: async () => undefined,
-});
+export const createAuthMock = () => {
+  const user = signal<unknown>(null);
+  return {
+    user,
+    isAuthenticated: computed(() => !!user()),
+    isAdmin: signal(false),
+    displayName: signal('Guest'),
+    signIn: async () => undefined,
+    signUp: async () => undefined,
+    signInWithGoogle: async () => undefined,
+    signOut: async () => undefined,
+  };
+};
 
 export const createForumMock = () => ({
   projects: signal([
