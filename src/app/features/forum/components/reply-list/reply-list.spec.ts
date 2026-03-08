@@ -90,4 +90,21 @@ describe('ReplyList', () => {
     expect(emitted).toBe(false);
   });
 
+  it('shows a validation message after clicking add reply with an empty draft', async () => {
+    fixture.componentRef.setInput('canReply', true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const submitButton: HTMLButtonElement | null = fixture.nativeElement.querySelector(
+      '.composer-actions button'
+    );
+    submitButton?.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const error: HTMLElement | null = fixture.nativeElement.querySelector('.validation-message');
+    expect(component.draftTouched()).toBe(true);
+    expect(error?.textContent).toContain('post.replyRequired');
+  });
+
 });

@@ -1,7 +1,6 @@
-<button matFab extended [disabled]="disabled()" [attr.aria-pressed]="liked()" aria-label="Like"
-    [class.is-liked]="liked()"
-    (click)="onToggle($event)">
+<button mat-flat-button class="btn-style1 like-button-control" type="button" [disabled]="disabled()"
+    [class.is-liked]="liked()" [attr.aria-pressed]="liked()"
+    [attr.aria-label]="liked() ? 'Unlike' : 'Like'" (click)="onToggle($event)">
+    <mat-icon>{{ liked() ? 'favorite' : 'favorite_border' }}</mat-icon>
     <span class="like-count">{{ likesCount() }}</span>
-    <!-- when liked we explicitly set fill on the generated SVG so tests can inspect it -->
-    <mat-icon [attr.fill]="liked() ? 'currentColor' : null">favorite</mat-icon>
 </button>

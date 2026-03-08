@@ -1,0 +1,13 @@
+.like-button-control {
+	min-width: 4.75rem;
+	padding-inline: 0.85rem !important;
+	box-shadow: none;
+
+	&:hover:not(:disabled) {
+		box-shadow: 0 12px 28px rgba(8, 240, 190, 0.15);
+	}
+}
+
+.like-count {
+	font-variant-numeric: tabular-nums;
+}

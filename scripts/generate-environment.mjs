@@ -28,6 +28,8 @@ const firebase = {
     messagingSenderId: getValue('FORUM_FIREBASE_MESSAGING_SENDER_ID', 'TEMP_REPLACE_ME'),
     appId: getValue('FORUM_FIREBASE_APP_ID', 'TEMP_REPLACE_ME'),
     measurementId: getValue('FORUM_FIREBASE_MEASUREMENT_ID', ''),
+    appCheckSiteKey: getValue('FORUM_FIREBASE_APP_CHECK_SITE_KEY', ''),
+    appCheckDebugToken: getValue('FORUM_FIREBASE_APP_CHECK_DEBUG_TOKEN', ''),
 };
 
 const forum = {

@@ -5,27 +5,221 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    // Admin helper: recognizes either a custom claim `admin == true`
-    // or the specific admin email. Using `request.auth.token.email` is
-    // convenient for testing but less secure than custom claims.
     function isAdmin() {
-      return request.auth != null && (
-        request.auth.token.admin == true
-      );
+      return isSignedIn() && request.auth.token.admin == true;
     }
 
-    function isCounterUpdate() {
-      return request.resource.data.diff(resource.data).changedKeys().hasOnly([
-        'likesCount',
-        'replyCount',
-        'repliesCount',
-        'subscribersCount',
-        'updatedAt'
-      ]);
+    function postPath(postId) {
+      return /databases/$(database)/documents/posts/$(postId);
     }
 
-    function keepsAuthorId() {
-      return request.resource.data.authorId == resource.data.authorId;
+    function likePath(postId, userId) {
+      return /databases/$(database)/documents/posts/$(postId)/likes/$(userId);
+    }
+
+    function hasExactFields(data, fields) {
+      return data.keys().hasAll(fields) && data.keys().hasOnly(fields);
+    }
+
+    function validString(value, min, max) {
+      return value is string && value.size() >= min && value.size() <= max;
+    }
+
+    function validOptionalString(value, max) {
+      return value is string && value.size() <= max;
+    }
+
+    function validPostType(value) {
+      return value == 'question' || value == 'issue';
+    }
+
+    function validTags(tags) {
+      return tags is list && tags.size() <= 10;
+    }
+
+    function postIdentityIsStable() {
+      let next = request.resource.data;
+      let current = resource.data;
+
+      return next.authorId == current.authorId &&
+             next.authorDisplayName == current.authorDisplayName &&
+             next.projectId == current.projectId &&
+             next.type == current.type &&
+             next.tags == current.tags &&
+             next.createdAt == current.createdAt;
+    }
+
+    function postBodyIsStable() {
+      let next = request.resource.data;
+      let current = resource.data;
+
+      return next.authorId == current.authorId &&
+             next.authorDisplayName == current.authorDisplayName &&
+             next.projectId == current.projectId &&
+             next.type == current.type &&
+             next.message == current.message &&
+             next.tags == current.tags &&
+             next.createdAt == current.createdAt &&
+             next.deleted == current.deleted;
+    }
+
+    function validPostCreate() {
+      let next = request.resource.data;
+
+      return hasExactFields(next, [
+               'authorId',
+               'authorDisplayName',
+               'projectId',
+               'type',
+               'message',
+               'tags',
+               'likesCount',
+               'replyCount',
+               'deleted',
+               'createdAt',
+               'updatedAt'
+             ]) &&
+             next.authorId == request.auth.uid &&
+             validString(next.authorDisplayName, 1, 80) &&
+             validString(next.projectId, 1, 80) &&
+             validPostType(next.type) &&
+             validString(next.message, 8, 4000) &&
+             validTags(next.tags) &&
+             next.likesCount == 0 &&
+             next.replyCount == 0 &&
+             next.deleted == false &&
+             next.createdAt == request.time &&
+             next.updatedAt == request.time;
+    }
+
+    function validPostEdit() {
+      let next = request.resource.data;
+
+      return postIdentityIsStable() &&
+             next.likesCount == resource.data.likesCount &&
+             next.replyCount == resource.data.replyCount &&
+             next.deleted == resource.data.deleted &&
+             request.resource.data.diff(resource.data).changedKeys().hasOnly(['message', 'updatedAt']) &&
+             validString(next.message, 1, 4000) &&
+             next.updatedAt == request.time;
+    }
+
+    function validPostLikeCounterUpdate(postId) {
+      let next = request.resource.data;
+      let likeBefore = exists(likePath(postId, request.auth.uid));
+      let likeAfter = existsAfter(likePath(postId, request.auth.uid));
+
+      return postBodyIsStable() &&
+             next.replyCount == resource.data.replyCount &&
+             next.likesCount is int &&
+             next.likesCount >= 0 &&
+             request.resource.data.diff(resource.data).changedKeys().hasOnly(['likesCount', 'updatedAt']) &&
+             next.updatedAt == request.time &&
+             (
+               (!likeBefore && likeAfter && next.likesCount == resource.data.likesCount + 1) ||
+               (likeBefore && !likeAfter && next.likesCount == resource.data.likesCount - 1)
+             );
+    }
+
+    function validPostReplyCounterUpdate() {
+      let next = request.resource.data;
+
+      return postBodyIsStable() &&
+             next.likesCount == resource.data.likesCount &&
+             next.replyCount is int &&
+             next.replyCount >= 0 &&
+             next.replyCount >= resource.data.replyCount - 1 &&
+             next.replyCount <= resource.data.replyCount + 1 &&
+             request.resource.data.diff(resource.data).changedKeys().hasOnly(['replyCount', 'updatedAt']) &&
+             next.updatedAt == request.time;
+    }
+
+    function validPostSoftDelete() {
+      let next = request.resource.data;
+
+      return postIdentityIsStable() &&
+             next.likesCount == resource.data.likesCount &&
+             next.replyCount is int &&
+             next.replyCount >= 0 &&
+             next.replyCount <= resource.data.replyCount &&
+             request.resource.data.diff(resource.data).changedKeys().hasOnly(['message', 'deleted', 'replyCount', 'updatedAt']) &&
+             next.message == '' &&
+             next.deleted == true &&
+             next.updatedAt == request.time;
+    }
+
+    function validReplyCreate(postId) {
+      let next = request.resource.data;
+      let parentBefore = get(postPath(postId));
+      let parentAfter = getAfter(postPath(postId));
+
+      return parentBefore != null &&
+             parentBefore.data.deleted == false &&
+             parentAfter != null &&
+             parentAfter.data.deleted == false &&
+             parentAfter.data.replyCount == parentBefore.data.replyCount + 1 &&
+             parentAfter.data.updatedAt == request.time &&
+             hasExactFields(next, [
+               'authorId',
+               'authorDisplayName',
+               'message',
+               'deleted',
+               'createdAt',
+               'updatedAt'
+             ]) &&
+             next.authorId == request.auth.uid &&
+             validString(next.authorDisplayName, 1, 80) &&
+             validString(next.message, 1, 2000) &&
+             next.deleted == false &&
+             next.createdAt == request.time &&
+             next.updatedAt == request.time;
+    }
+
+    function validReplyEdit() {
+      let next = request.resource.data;
+
+      return request.resource.data.diff(resource.data).changedKeys().hasOnly(['message', 'updatedAt']) &&
+             next.authorId == resource.data.authorId &&
+             next.authorDisplayName == resource.data.authorDisplayName &&
+             next.deleted == resource.data.deleted &&
+             next.createdAt == resource.data.createdAt &&
+             validString(next.message, 1, 2000) &&
+             next.updatedAt == request.time;
+    }
+
+    function validReplySoftDeleteState() {
+      let next = request.resource.data;
+
+      return request.resource.data.diff(resource.data).changedKeys().hasOnly(['message', 'deleted', 'updatedAt']) &&
+             next.authorId == resource.data.authorId &&
+             next.authorDisplayName == resource.data.authorDisplayName &&
+             next.createdAt == resource.data.createdAt &&
+             next.message == '' &&
+             next.deleted == true &&
+             next.updatedAt == request.time;
+    }
+
+    function validReplySoftDelete(postId) {
+      let parentBefore = get(postPath(postId));
+      let parentAfter = getAfter(postPath(postId));
+
+      return parentBefore != null &&
+             parentAfter != null &&
+             validReplySoftDeleteState() &&
+             (
+               (
+                 parentAfter.data.deleted == false &&
+                 parentAfter.data.replyCount == parentBefore.data.replyCount - 1 &&
+                 parentAfter.data.updatedAt == request.time
+               ) ||
+               (
+                 parentAfter.data.deleted == true &&
+                 parentAfter.data.message == '' &&
+                 parentAfter.data.replyCount >= 0 &&
+                 parentAfter.data.replyCount <= parentBefore.data.replyCount &&
+                 parentAfter.data.updatedAt == request.time
+               )
+             );
     }
 
     match /projects/{projectId} {
@@ -36,48 +230,52 @@ service cloud.firestore {
     match /posts/{postId} {
       allow read: if true;
 
-      allow create: if isSignedIn() && (
-        request.resource.data.authorId == request.auth.uid ||
-        isAdmin()
-      );
+      allow create: if isSignedIn() && validPostCreate();
 
       allow update: if isSignedIn() && (
-        (resource.data.authorId == request.auth.uid && keepsAuthorId()) ||
-        isCounterUpdate() ||
-        (isAdmin() && keepsAuthorId())
+        (resource.data.authorId == request.auth.uid && validPostEdit()) ||
+        validPostLikeCounterUpdate(postId) ||
+        validPostReplyCounterUpdate() ||
+        ((resource.data.authorId == request.auth.uid || isAdmin()) && validPostSoftDelete())
       );
 
       allow delete: if false;
 
-      match /votes/{voteUserId} {
-        allow read: if isSignedIn();
-        allow create: if isSignedIn() &&
-                      voteUserId == request.auth.uid &&
-                      request.resource.data.uid == request.auth.uid;
-        allow delete: if isSignedIn() && voteUserId == request.auth.uid;
-        allow update: if false;
-      }
-      // Allow likes collection (client uses 'likes' path)
       match /likes/{likeUserId} {
         allow read: if isSignedIn();
         allow create: if isSignedIn() &&
                       likeUserId == request.auth.uid &&
-                      request.resource.data.uid == request.auth.uid;
+                      hasExactFields(request.resource.data, ['uid', 'createdAt']) &&
+                      request.resource.data.uid == request.auth.uid &&
+                      request.resource.data.createdAt == request.time;
         allow delete: if isSignedIn() && likeUserId == request.auth.uid;
         allow update: if false;
       }
 
       match /subscriptions/{subscriptionUserId} {
-        allow read, create, delete: if isSignedIn() && subscriptionUserId == request.auth.uid;
+        allow read, delete: if isSignedIn() && subscriptionUserId == request.auth.uid;
+        allow create: if isSignedIn() &&
+                      subscriptionUserId == request.auth.uid &&
+                      hasExactFields(request.resource.data, ['uid', 'email', 'createdAt']) &&
+                      request.resource.data.uid == request.auth.uid &&
+                      validOptionalString(request.resource.data.email, 320) &&
+                      request.resource.data.createdAt == request.time;
         allow update: if false;
       }
 
       match /replies/{replyId} {
         allow read: if true;
-        allow create: if isSignedIn() && request.resource.data.authorId == request.auth.uid;
+        allow create: if isSignedIn() && validReplyCreate(postId);
         allow update: if isSignedIn() &&
-                      request.resource.data.authorId == resource.data.authorId &&
-                      (resource.data.authorId == request.auth.uid || isAdmin());
+                      (
+                        (resource.data.authorId == request.auth.uid && validReplyEdit()) ||
+                        ((resource.data.authorId == request.auth.uid || isAdmin()) && validReplySoftDelete(postId)) ||
+                        (
+                          validReplySoftDelete(postId) &&
+                          get(postPath(postId)).data.authorId == request.auth.uid &&
+                          getAfter(postPath(postId)).data.deleted == true
+                        )
+                      );
         allow delete: if false;
       }
     }

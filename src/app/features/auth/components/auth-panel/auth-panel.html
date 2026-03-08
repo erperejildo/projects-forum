@@ -1,12 +1,12 @@
 <mat-card class="auth-panel surface">
-    <mat-card-header>
-        <mat-card-title>{{ (mode() === 'sign-in' ? 'auth.signIn' : 'auth.register') | translate }}</mat-card-title>
-        <div class="header-actions">
-            <button mat-icon-button aria-label="{{ 'common.close' | translate }}" type="button" (click)="close()">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-    </mat-card-header>
+    <button mat-icon-button class="close-button" aria-label="{{ 'common.close' | translate }}" type="button"
+        (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="panel-head">
+        <h2 class="panel-title">{{ (mode() === 'sign-in' ? 'auth.signIn' : 'auth.register') | translate }}</h2>
+    </div>
 
     <mat-card-content>
         <div class="mode-row">
@@ -75,17 +75,15 @@
             }
 
             <div class="form-actions">
+                <button mat-stroked-button class="btn-style2" type="button" [disabled]="loading()"
+                    (click)="continueWithGoogle()">
+                    {{ 'auth.continueWithGoogle' | translate }}
+                </button>
+
                 <button mat-flat-button color="primary" class="btn-style1" type="submit" [disabled]="loading()">
                     {{ (mode() === 'sign-in' ? 'auth.signIn' : 'auth.register') | translate }}
                 </button>
             </div>
         </form>
-
-        <div class="google-row">
-            <button mat-stroked-button class="btn-style1" type="button" [disabled]="loading()"
-                (click)="continueWithGoogle()">
-                {{ 'auth.continueWithGoogle' | translate }}
-            </button>
-        </div>
     </mat-card-content>
 </mat-card>

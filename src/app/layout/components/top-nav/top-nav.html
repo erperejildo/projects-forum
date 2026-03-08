@@ -11,9 +11,6 @@
         <a mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
             {{ 'nav.home' | translate }}
         </a>
-        <a mat-button routerLink="/create" routerLinkActive="active-link">
-            {{ 'nav.createPost' | translate }}
-        </a>
     </nav>
 
     <div class="actions">
@@ -22,12 +19,12 @@
         @if (authService.isAuthenticated()) {
         <div class="identity-row">
             <div class="identity-value">{{ authService.displayName() }}</div>
-            <button mat-stroked-button class="btn-style1 header-action-control" type="button" (click)="signOut()">
+            <button mat-stroked-button class="btn-style2 header-action-control" type="button" (click)="signOut()">
                 {{ 'auth.signOut' | translate }}
             </button>
         </div>
         } @else {
-        <button mat-flat-button class="header-action-control" type="button" (click)="toggleAuthPanel()">
+        <button mat-flat-button class="btn-style1 header-action-control" type="button" (click)="toggleAuthPanel()">
             {{ 'auth.signIn' | translate }}
         </button>
         }

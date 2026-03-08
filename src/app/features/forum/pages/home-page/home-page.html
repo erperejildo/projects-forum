@@ -4,8 +4,8 @@
         <p class="muted">{{ 'home.subtitle' | translate }}</p>
     </div>
 
-    <a mat-flat-button class="ask-help-button header-action-control" routerLink="/create">{{ 'home.askButton' |
-        translate }}</a>
+    <a mat-flat-button class="ask-help-button btn-style1 header-action-control" routerLink="/create">{{
+        'nav.createPost' | translate }}</a>
 </section>
 
 @if (usingFallbackProjects()) {
@@ -27,7 +27,9 @@
     <p class="muted">{{ 'home.noPosts' | translate }}</p>
     } @else {
     @for (post of filteredPosts(); track post.id) {
-    <app-post-card [post]="post" [projectName]="projectName(post.projectId)" [canLike]="authService.isAuthenticated()"
+    <app-post-card [post]="post" [projectName]="projectName(post.projectId)"
+        [messagePreviewLength]="postMessagePreviewLength"
+        [likeDisabled]="!authService.isAuthenticated()"
         (likeToggle)="onLikeToggle($event)"></app-post-card>
     }
     }

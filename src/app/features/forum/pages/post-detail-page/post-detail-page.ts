@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -8,7 +7,7 @@ import { ForumPost, ForumReply } from '../../../../core/models/forum-models';
 import { Auth } from '../../../../core/services/auth';
 import { Forum } from '../../../../core/services/forum';
 import { ReplyList } from '../../components/reply-list/reply-list';
-import { LikeButton } from '../../../../shared/components/like-button/like-button';
+import { PostCard } from '../../components/post-card/post-card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,9 +18,8 @@ import { openConfirmDialog } from '../../../../shared/components/confirm-dialog/
   selector: 'app-post-detail-page',
   imports: [
     TranslatePipe,
-    DatePipe,
     ReplyList,
-    LikeButton,
+    PostCard,
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
@@ -255,12 +253,18 @@ export class PostDetailPage {
 
     this.busy.set(true);
     this.errorMessage.set('');
+    let deleted = false;
     try {
       await this.forumService.softDeletePost(id, user, this.authService.isAdmin());
+      deleted = true;
     } catch (error) {
       this.errorMessage.set(error instanceof Error ? error.message : 'Unable to delete post.');
     } finally {
       this.busy.set(false);
+    }
+
+    if (deleted) {
+      await this.router.navigate(['/'], { replaceUrl: true });
     }
   }
 

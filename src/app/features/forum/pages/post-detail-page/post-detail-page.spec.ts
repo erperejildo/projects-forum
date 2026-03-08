@@ -1,11 +1,8 @@
-// jasmine's spyOn helper is globally available in specs
-
-declare const spyOn: any;
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { convertToParamMap, ActivatedRoute } from '@angular/router';
+import { convertToParamMap, ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { signal } from '@angular/core';
+import { vi } from 'vitest';
 import { Auth } from '../../../../core/services/auth';
 import { Forum } from '../../../../core/services/forum';
 import {
@@ -100,6 +97,9 @@ describe('PostDetailPage', () => {
 
   it('deletePost respects confirmation dialog', async () => {
     let deletedCalled = false;
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
     (forumMock as any).softDeletePost = async () => {
       deletedCalled = true;
     };
@@ -108,10 +108,12 @@ describe('PostDetailPage', () => {
     setConfirmDialogHandler(() => Promise.resolve(false));
     await component.deletePost();
     expect(deletedCalled).toBe(false);
+    expect(navigateSpy).not.toHaveBeenCalled();
 
     // now true
     setConfirmDialogHandler(() => Promise.resolve(true));
     await component.deletePost();
     expect(deletedCalled).toBe(true);
+    expect(navigateSpy).toHaveBeenCalledWith(['/'], { replaceUrl: true });
   });
 });

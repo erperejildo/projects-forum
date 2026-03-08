@@ -95,6 +95,8 @@ export class AuthPanel {
         await this.authService.signUp(email, password);
         // clean up confirm password after successful registration so form can be reused
         this.form.controls.confirmPassword.reset('');
+      } else {
+        await this.authService.signIn(email, password);
       }
 
       this.closed.emit();

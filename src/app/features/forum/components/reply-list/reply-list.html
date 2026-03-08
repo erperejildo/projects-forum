@@ -38,11 +38,11 @@
                 <div class="editor-wrap">
                     <mat-form-field appearance="outline" class="editor-field">
                         <textarea matInput [value]="editDraft()" [disabled]="submitting()" required
-                            (input)="onEditDraftChange($event)"></textarea>
-                        @if (editTouched() && !canSave()) {
-                        <mat-error>{{ 'post.replyRequired' | translate }}</mat-error>
-                        }
+                            (input)="onEditDraftChange($event)" (blur)="markEditTouched()"></textarea>
                     </mat-form-field>
+                    @if (editTouched() && !canSave()) {
+                    <p class="danger-text validation-message">{{ 'post.replyRequired' | translate }}</p>
+                    }
                     <div class="editor-actions">
                         <button mat-stroked-button class="btn-style2" type="button" [disabled]="submitting()"
                             (click)="cancelReplyEdit()">{{ 'common.cancel' | translate }}</button>
@@ -63,14 +63,16 @@
     <div class="composer">
         <mat-form-field appearance="outline" class="composer-field">
             <textarea matInput [value]="draft()" [placeholder]="'post.replyPlaceholder' | translate" required
-                (input)="onDraftChange($event)"></textarea>
-            @if (draftTouched() && !canSubmit()) {
-            <mat-error>{{ 'post.replyRequired' | translate }}</mat-error>
-            }
+                (input)="onDraftChange($event)" (blur)="markDraftTouched()"></textarea>
         </mat-form-field>
+        @if (draftTouched() && !canSubmit()) {
+        <p class="danger-text validation-message">{{ 'post.replyRequired' | translate }}</p>
+        }
 
-        <button mat-flat-button class="reply-submit" type="button" [disabled]="submitting() || !canSubmit()" (click)="submit()">{{
-            'post.addReply' | translate }}</button>
+        <div class="composer-actions">
+            <button mat-flat-button class="btn-style1" type="button" [disabled]="submitting()" (click)="submit()">{{
+                'post.addReply' | translate }}</button>
+        </div>
     </div>
     } @else {
     <p class="muted">{{ 'post.replyRequiresAuth' | translate }}</p>

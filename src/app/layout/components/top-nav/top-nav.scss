@@ -63,6 +63,10 @@
     align-items: center;
     gap: 0.7rem;
     min-width: 0;
+
+    app-language-switcher {
+        display: block;
+    }
 }
 
 .identity-row {
@@ -84,41 +88,6 @@
     text-overflow: ellipsis;
     overflow: hidden;
     text-align: right;
-}
-
-.btn-style1 {
-    /* formerly .signout-top; used for primary actions (sign out, save/ok/done, etc.)
-       default background defined here, but hover handled by Material so that
-       Save/primary actions retain their color. */
-    height: 38px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-color: var(--line-strong);
-    color: var(--text-main) !important;
-    background: rgba(6, 15, 25, 0.75) !important;
-}
-
-.btn-style2 {
-    /* secondary/cancel actions: keep the simpler cancel hover behaviour */
-    height: 38px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-color: var(--line-strong);
-    color: var(--text-main) !important;
-    background: transparent !important;
-
-    &:hover:not(:disabled) {
-        /* mimic the previous .button-secondary hover */
-        transform: translateY(-1px);
-        background: rgba(8, 18, 28, 0.7) !important;
-    }
-}
-
-.header-action-control {
-    border-radius: var(--radius-control);
-    min-height: 38px;
 }
 
 .auth-panel-wrap {
