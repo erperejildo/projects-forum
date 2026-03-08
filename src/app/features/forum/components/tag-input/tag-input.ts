@@ -7,7 +7,13 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-tag-input',
-  imports: [TranslatePipe, MatIconModule, MatAutocompleteModule, MatFormFieldModule, MatInputModule],
+  imports: [
+    TranslatePipe,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
   templateUrl: './tag-input.html',
   styleUrl: './tag-input.scss',
 })

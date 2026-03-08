@@ -1,81 +1,81 @@
 .replies {
-    display: grid;
-    gap: 0.8rem;
-    margin-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
 }
 
 .thread {
-    display: grid;
-    gap: 0.7rem;
+  display: grid;
+  gap: 0.7rem;
 }
 
 .reply-card {
-    border-radius: var(--radius-lg);
-    padding: 0.8rem;
-    min-height: 0;
-    display: block;
+  border-radius: var(--radius-lg);
+  padding: 0.8rem;
+  min-height: 0;
+  display: block;
 
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.8rem;
-        margin-bottom: 0.5rem;
-    }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
 
-    p {
-        margin: 0;
-        line-height: 1.5;
-        white-space: pre-wrap;
-        word-break: break-word;
-    }
+  p {
+    margin: 0;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
 
-    time {
-        color: var(--text-muted);
-        font-size: 0.82rem;
-    }
+  time {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
 }
 
 .reply-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* kebab-trigger style removed; default mat-icon-button styling preferred */
 
 .editor-wrap {
-    display: grid;
-    gap: 0.55rem;
+  display: grid;
+  gap: 0.55rem;
 }
 
 .editor-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
 
 .composer {
-    display: grid;
-    gap: 0.65rem;
+  display: grid;
+  gap: 0.65rem;
 }
 
 .composer-actions {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .validation-message {
-    margin: -0.15rem 0 0;
-    font-size: 0.82rem;
+  margin: -0.15rem 0 0;
+  font-size: 0.82rem;
 }
 
 :is(.composer-field, .editor-field) {
-    .mdc-text-field {
-        background: transparent;
-    }
+  .mdc-text-field {
+    background: transparent;
+  }
 
-    .mat-mdc-input-element {
-        color: var(--text-main);
-    }
+  .mat-mdc-input-element {
+    color: var(--text-main);
+  }
 }

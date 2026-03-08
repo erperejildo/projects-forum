@@ -1,80 +1,127 @@
 <section class="replies">
-    <h3>{{ 'post.replies' | translate }}</h3>
+  <h3>{{ 'post.replies' | translate }}</h3>
 
-    <div class="thread">
-        @if (!replies().length) {
-        <p class="muted">{{ 'post.noReplies' | translate }}</p>
-        }
-
-        @for (reply of replies(); track reply.id) {
-        <article class="surface reply-card">
-            <div class="reply-content">
-                <header>
-                    <strong>{{ reply.authorDisplayName }}</strong>
-                    <div class="reply-meta">
-                        <time>{{ reply.createdAt | date: 'dd/MM/yy, h:mm a' }}</time>
-                        @if (canManageReply(reply)) {
-                        <button mat-icon-button type="button" class="kebab-trigger" [disabled]="submitting()"
-                            [matMenuTriggerFor]="replyActionsMenu" aria-label="Reply actions">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #replyActionsMenu="matMenu" xPosition="before">
-                            @if (canEditReply(reply)) {
-                            <button mat-menu-item type="button" [disabled]="submitting()"
-                                (click)="startReplyEdit(reply)">
-                                {{ 'common.edit' | translate }}
-                            </button>
-                            }
-                            <button mat-menu-item type="button" [disabled]="submitting()"
-                                (click)="deleteReply(reply.id)">
-                                {{ 'common.delete' | translate }}
-                            </button>
-                        </mat-menu>
-                        }
-                    </div>
-                </header>
-
-                @if (editingReplyId() === reply.id) {
-                <div class="editor-wrap">
-                    <mat-form-field appearance="outline" class="editor-field">
-                        <textarea matInput [value]="editDraft()" [disabled]="submitting()" required
-                            (input)="onEditDraftChange($event)" (blur)="markEditTouched()"></textarea>
-                    </mat-form-field>
-                    @if (editTouched() && !canSave()) {
-                    <p class="danger-text validation-message">{{ 'post.replyRequired' | translate }}</p>
-                    }
-                    <div class="editor-actions">
-                        <button mat-stroked-button class="btn-style2" type="button" [disabled]="submitting()"
-                            (click)="cancelReplyEdit()">{{ 'common.cancel' | translate }}</button>
-                        <button mat-flat-button color="primary" class="btn-style1" type="button"
-                            [disabled]="submitting() || !canSave()" (click)="saveReplyEdit(reply.id)">{{ 'common.save' | translate
-                            }}</button>
-                    </div>
-                </div>
-                } @else {
-                <p>{{ reply.message }}</p>
-                }
-            </div>
-        </article>
-        }
-    </div>
-
-    @if (canReply()) {
-    <div class="composer">
-        <mat-form-field appearance="outline" class="composer-field">
-            <textarea matInput [value]="draft()" [placeholder]="'post.replyPlaceholder' | translate" required
-                (input)="onDraftChange($event)" (blur)="markDraftTouched()"></textarea>
-        </mat-form-field>
-        @if (draftTouched() && !canSubmit()) {
-        <p class="danger-text validation-message">{{ 'post.replyRequired' | translate }}</p>
-        }
-
-        <div class="composer-actions">
-            <button mat-flat-button class="btn-style1" type="button" [disabled]="submitting()" (click)="submit()">{{
-                'post.addReply' | translate }}</button>
-        </div>
-    </div>
-    } @else {
-    <p class="muted">{{ 'post.replyRequiresAuth' | translate }}</p>
+  <div class="thread">
+    @if (!replies().length) {
+      <p class="muted">{{ 'post.noReplies' | translate }}</p>
     }
+
+    @for (reply of replies(); track reply.id) {
+      <article class="surface reply-card">
+        <div class="reply-content">
+          <header>
+            <strong>{{ reply.authorDisplayName }}</strong>
+            <div class="reply-meta">
+              <time>{{ reply.createdAt | date: 'dd/MM/yy, h:mm a' }}</time>
+              @if (canManageReply(reply)) {
+                <button
+                  mat-icon-button
+                  type="button"
+                  class="kebab-trigger"
+                  [disabled]="submitting()"
+                  [matMenuTriggerFor]="replyActionsMenu"
+                  aria-label="Reply actions"
+                >
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #replyActionsMenu="matMenu" xPosition="before">
+                  @if (canEditReply(reply)) {
+                    <button
+                      mat-menu-item
+                      type="button"
+                      [disabled]="submitting()"
+                      (click)="startReplyEdit(reply)"
+                    >
+                      {{ 'common.edit' | translate }}
+                    </button>
+                  }
+                  <button
+                    mat-menu-item
+                    type="button"
+                    [disabled]="submitting()"
+                    (click)="deleteReply(reply.id)"
+                  >
+                    {{ 'common.delete' | translate }}
+                  </button>
+                </mat-menu>
+              }
+            </div>
+          </header>
+
+          @if (editingReplyId() === reply.id) {
+            <div class="editor-wrap">
+              <mat-form-field appearance="outline" class="editor-field">
+                <textarea
+                  matInput
+                  [value]="editDraft()"
+                  [disabled]="submitting()"
+                  required
+                  (input)="onEditDraftChange($event)"
+                  (blur)="markEditTouched()"
+                ></textarea>
+              </mat-form-field>
+              @if (editTouched() && !canSave()) {
+                <p class="danger-text validation-message">{{ 'post.replyRequired' | translate }}</p>
+              }
+              <div class="editor-actions">
+                <button
+                  mat-stroked-button
+                  class="btn-style2"
+                  type="button"
+                  [disabled]="submitting()"
+                  (click)="cancelReplyEdit()"
+                >
+                  {{ 'common.cancel' | translate }}
+                </button>
+                <button
+                  mat-flat-button
+                  color="primary"
+                  class="btn-style1"
+                  type="button"
+                  [disabled]="submitting() || !canSave()"
+                  (click)="saveReplyEdit(reply.id)"
+                >
+                  {{ 'common.save' | translate }}
+                </button>
+              </div>
+            </div>
+          } @else {
+            <p>{{ reply.message }}</p>
+          }
+        </div>
+      </article>
+    }
+  </div>
+
+  @if (canReply()) {
+    <div class="composer">
+      <mat-form-field appearance="outline" class="composer-field">
+        <textarea
+          matInput
+          [value]="draft()"
+          [placeholder]="'post.replyPlaceholder' | translate"
+          required
+          (input)="onDraftChange($event)"
+          (blur)="markDraftTouched()"
+        ></textarea>
+      </mat-form-field>
+      @if (draftTouched() && !canSubmit()) {
+        <p class="danger-text validation-message">{{ 'post.replyRequired' | translate }}</p>
+      }
+
+      <div class="composer-actions">
+        <button
+          mat-flat-button
+          class="btn-style1"
+          type="button"
+          [disabled]="submitting()"
+          (click)="submit()"
+        >
+          {{ 'post.addReply' | translate }}
+        </button>
+      </div>
+    </div>
+  } @else {
+    <p class="muted">{{ 'post.replyRequiresAuth' | translate }}</p>
+  }
 </section>

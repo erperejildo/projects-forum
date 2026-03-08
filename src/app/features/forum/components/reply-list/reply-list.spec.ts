@@ -1,4 +1,3 @@
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideUiTesting } from '../../../../testing/testing-providers';
 import { of } from 'rxjs';
@@ -52,9 +51,7 @@ describe('ReplyList', () => {
     fixture.detectChanges();
     await fixture.whenStable();
 
-    const kebab: HTMLElement | null = fixture.nativeElement.querySelector(
-      'button.kebab-trigger'
-    );
+    const kebab: HTMLElement | null = fixture.nativeElement.querySelector('button.kebab-trigger');
     if (kebab) {
       const style = getComputedStyle(kebab);
       expect(style.borderStyle).toBe('none');
@@ -77,7 +74,6 @@ describe('ReplyList', () => {
     expect(emitted).toBe(true);
   });
 
-
   it('submit() does not emit when draft blank', () => {
     let emitted = false;
     (component.replySubmitted as any).emit = () => {
@@ -96,7 +92,7 @@ describe('ReplyList', () => {
     await fixture.whenStable();
 
     const submitButton: HTMLButtonElement | null = fixture.nativeElement.querySelector(
-      '.composer-actions button'
+      '.composer-actions button',
     );
     submitButton?.click();
     fixture.detectChanges();
@@ -106,5 +102,4 @@ describe('ReplyList', () => {
     expect(component.draftTouched()).toBe(true);
     expect(error?.textContent).toContain('post.replyRequired');
   });
-
 });

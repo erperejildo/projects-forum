@@ -1,34 +1,34 @@
 .post-editor {
-    display: grid;
-    gap: 0.6rem;
+  display: grid;
+  gap: 0.6rem;
 
-    textarea {
-        min-height: 10rem;
-        resize: vertical;
-        width: 100%;
-        border-radius: var(--radius-md);
-        border: 1px solid var(--line-soft);
-        background: rgba(6, 17, 29, 0.8);
-        color: var(--text-main);
-        padding: 0.9rem 1rem;
-        font: inherit;
-    }
+  textarea {
+    min-height: 10rem;
+    resize: vertical;
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line-soft);
+    background: rgba(6, 17, 29, 0.8);
+    color: var(--text-main);
+    padding: 0.9rem 1rem;
+    font: inherit;
+  }
 }
 
 .editor-actions {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: flex-end;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
 }
 
 .detail-actions {
-    display: inline-flex;
-    align-items: center;
+  display: inline-flex;
+  align-items: center;
 }
 
 @media (max-width: 640px) {
-    .editor-actions {
-        justify-content: flex-start;
-        flex-wrap: wrap;
-    }
+  .editor-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
 }

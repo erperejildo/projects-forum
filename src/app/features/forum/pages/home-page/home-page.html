@@ -1,36 +1,49 @@
 <section class="hero surface">
-    <div>
-        <h1>{{ 'home.title' | translate }}</h1>
-        <p class="muted">{{ 'home.subtitle' | translate }}</p>
-    </div>
+  <div>
+    <h1>{{ 'home.title' | translate }}</h1>
+    <p class="muted">{{ 'home.subtitle' | translate }}</p>
+  </div>
 
-    <a mat-flat-button class="ask-help-button btn-style1 header-action-control" routerLink="/create">{{
-        'nav.createPost' | translate }}</a>
+  <a
+    mat-flat-button
+    class="ask-help-button btn-style1 header-action-control"
+    routerLink="/create"
+    >{{ 'nav.createPost' | translate }}</a
+  >
 </section>
 
 @if (usingFallbackProjects()) {
-<p class="muted helper-note">{{ 'home.fallbackProjectsNotice' | translate }}</p>
+  <p class="muted helper-note">{{ 'home.fallbackProjectsNotice' | translate }}</p>
 }
 
-<app-filter-bar [projects]="projects()" [tags]="popularTags()" [selectedProject]="filters().projectId ?? ''"
-    [selectedTag]="filters().tag" [search]="filters().search" [order]="filters().order"
-    (filterChange)="onFilterChange($event)"></app-filter-bar>
+<app-filter-bar
+  [projects]="projects()"
+  [tags]="popularTags()"
+  [selectedProject]="filters().projectId ?? ''"
+  [selectedTag]="filters().tag"
+  [search]="filters().search"
+  [order]="filters().order"
+  (filterChange)="onFilterChange($event)"
+></app-filter-bar>
 
 @if (errorMessage()) {
-<p class="danger-text">{{ errorMessage() }}</p>
+  <p class="danger-text">{{ errorMessage() }}</p>
 }
 
 <section class="posts-list">
-    @if (loading()) {
+  @if (loading()) {
     <p class="muted">{{ 'common.loading' | translate }}</p>
-    } @else if (!filteredPosts().length) {
+  } @else if (!filteredPosts().length) {
     <p class="muted">{{ 'home.noPosts' | translate }}</p>
-    } @else {
+  } @else {
     @for (post of filteredPosts(); track post.id) {
-    <app-post-card [post]="post" [projectName]="projectName(post.projectId)"
+      <app-post-card
+        [post]="post"
+        [projectName]="projectName(post.projectId)"
         [messagePreviewLength]="postMessagePreviewLength"
         [likeDisabled]="!authService.isAuthenticated()"
-        (likeToggle)="onLikeToggle($event)"></app-post-card>
+        (likeToggle)="onLikeToggle($event)"
+      ></app-post-card>
     }
-    }
+  }
 </section>

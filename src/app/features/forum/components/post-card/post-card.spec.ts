@@ -47,7 +47,9 @@ describe('PostCard', () => {
   it('truncates long messages when a preview length is provided', async () => {
     fixture.componentRef.setInput(
       'post',
-      createPost('This is a long post body that should stop before the cutoff so the home feed stays compact for readers.'),
+      createPost(
+        'This is a long post body that should stop before the cutoff so the home feed stays compact for readers.',
+      ),
     );
     fixture.componentRef.setInput('messagePreviewLength', 52);
     fixture.detectChanges();

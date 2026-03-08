@@ -296,9 +296,7 @@ export class Forum {
 
       transaction.set(replyRef, {
         authorId: user.uid,
-        authorDisplayName: this.auth.isAdmin()
-          ? 'Admin'
-          : user.displayName || user.email || 'User',
+        authorDisplayName: this.auth.isAdmin() ? 'Admin' : user.displayName || user.email || 'User',
         message,
         deleted: false,
         createdAt: serverTimestamp(),
@@ -439,7 +437,12 @@ export class Forum {
     });
   }
 
-  async softDeleteReply(postId: string, replyId: string, user: User, isAdmin: boolean): Promise<void> {
+  async softDeleteReply(
+    postId: string,
+    replyId: string,
+    user: User,
+    isAdmin: boolean,
+  ): Promise<void> {
     const db = this.requireDb();
     const postRef = doc(db, 'posts', postId);
     const replyRef = doc(db, `posts/${postId}/replies/${replyId}`);

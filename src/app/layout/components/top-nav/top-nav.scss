@@ -1,127 +1,127 @@
 .nav-root {
-    margin: 1rem auto;
-    width: min(1120px, 92vw);
-    height: auto;
-    padding: 0.9rem 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-    justify-content: space-between;
+  margin: 1rem auto;
+  width: min(1120px, 92vw);
+  height: auto;
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
 }
 
 .brand {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
 
-    strong {
-        display: block;
-        font-size: 1.1rem;
-    }
+  strong {
+    display: block;
+    font-size: 1.1rem;
+  }
 
-    p {
-        margin: 0.1rem 0 0;
-        font-size: 0.82rem;
-        color: var(--text-muted);
-    }
+  p {
+    margin: 0.1rem 0 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
 }
 
 .brand-dot {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-strong), #45a8ff);
-    box-shadow: 0 0 0 4px rgba(8, 240, 190, 0.15);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-strong), #45a8ff);
+  box-shadow: 0 0 0 4px rgba(8, 240, 190, 0.15);
 }
 
 .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    min-width: 0;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  min-width: 0;
+  justify-content: center;
 
-    a {
-        border-radius: var(--radius-control);
-        border: 1px solid transparent;
-        padding: 0.35rem 0.75rem;
-        color: var(--text-muted);
-    }
+  a {
+    border-radius: var(--radius-control);
+    border: 1px solid transparent;
+    padding: 0.35rem 0.75rem;
+    color: var(--text-muted);
+  }
 
-    a:hover,
-    .active-link {
-        border-color: var(--line-strong);
-        color: var(--text-main);
-        background: rgba(5, 16, 28, 0.72);
-    }
+  a:hover,
+  .active-link {
+    border-color: var(--line-strong);
+    color: var(--text-main);
+    background: rgba(5, 16, 28, 0.72);
+  }
 }
 
 .actions {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
 
-    app-language-switcher {
-        display: block;
-    }
+  app-language-switcher {
+    display: block;
+  }
 }
 
 .identity-row {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.25rem;
-    min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  min-width: 0;
 }
 
 .identity-value {
-    /* allow shrinking on narrow screens */
-    min-width: 0;
-    max-width: 200px;
-    padding: 0.3rem 0.6rem;
-    font-size: 0.88rem;
-    color: var(--text-main);
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-align: right;
+  /* allow shrinking on narrow screens */
+  min-width: 0;
+  max-width: 200px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.88rem;
+  color: var(--text-main);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: right;
 }
 
 .auth-panel-wrap {
-    width: min(1120px, 92vw);
-    margin: 0 auto;
-    padding: 1rem;
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 @media (max-width: 880px) {
-    .nav-root {
-        grid-template-columns: 1fr;
-        grid-auto-rows: auto;
-    }
+  .nav-root {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
 
-    .brand,
-    .nav-links,
-    .actions {
-        width: 100%;
-    }
+  .brand,
+  .nav-links,
+  .actions {
+    width: 100%;
+  }
 
-    .actions {
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 0.5rem;
-    }
+  .actions {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
 
-    .identity-row {
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 0.5rem;
-    }
+  .identity-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
 
-    .identity-value {
-        text-align: left;
-    }
+  .identity-value {
+    text-align: left;
+  }
 }

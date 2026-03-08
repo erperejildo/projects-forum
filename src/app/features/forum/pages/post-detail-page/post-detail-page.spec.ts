@@ -70,12 +70,8 @@ describe('PostDetailPage', () => {
     fixture.detectChanges();
     await fixture.whenStable();
 
-    const cancelBtn: HTMLElement | null = fixture.nativeElement.querySelector(
-      'button.btn-style2'
-    );
-    const saveBtn: HTMLElement | null = fixture.nativeElement.querySelector(
-      'button.btn-style1'
-    );
+    const cancelBtn: HTMLElement | null = fixture.nativeElement.querySelector('button.btn-style2');
+    const saveBtn: HTMLElement | null = fixture.nativeElement.querySelector('button.btn-style1');
 
     expect(cancelBtn).toBeTruthy();
     expect(saveBtn).toBeTruthy();
@@ -84,9 +80,7 @@ describe('PostDetailPage', () => {
   it('kebab trigger has no border and no custom background', () => {
     // the component has an actions section with a kebab trigger
     fixture.detectChanges();
-    const kebab: HTMLElement | null = fixture.nativeElement.querySelector(
-      'button.kebab-trigger'
-    );
+    const kebab: HTMLElement | null = fixture.nativeElement.querySelector('button.kebab-trigger');
     if (kebab) {
       const style = getComputedStyle(kebab);
       expect(style.borderStyle).toBe('none');

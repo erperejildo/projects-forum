@@ -45,8 +45,6 @@ export let openConfirmDialog: (
  * Testing helper to swap out the confirmation dialog implementation.
  * Useful in specs for stubbing without needing to stub MatDialog directly.
  */
-export function setConfirmDialogHandler(
-  handler: typeof openConfirmDialog,
-): void {
+export function setConfirmDialogHandler(handler: typeof openConfirmDialog): void {
   openConfirmDialog = handler;
 }

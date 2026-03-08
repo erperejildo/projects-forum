@@ -29,15 +29,17 @@ describe('TopNav', () => {
   it('sign out uses secondary style class', async () => {
     // Ensure auth mock reports a logged-in user so the button appears
     // the computed isAuthenticated will flip automatically when user changes
-    component.authService.user.set({ uid: 'u', displayName: 'User', email: 'u@example.com' } as any);
+    component.authService.user.set({
+      uid: 'u',
+      displayName: 'User',
+      email: 'u@example.com',
+    } as any);
     // also flip the explicit authenticated signal on the mock
     (component.authService.isAuthenticated as any).set(true);
     fixture.detectChanges();
     await fixture.whenStable();
 
-    const btn: HTMLElement | null = fixture.nativeElement.querySelector(
-      'button.btn-style2'
-    );
+    const btn: HTMLElement | null = fixture.nativeElement.querySelector('button.btn-style2');
     expect(btn).toBeTruthy();
   });
 

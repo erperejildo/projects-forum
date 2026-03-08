@@ -1,8 +1,8 @@
 <mat-form-field appearance="outline" class="switcher header-action-control">
-    <mat-label>{{ 'nav.language' | translate }}</mat-label>
-    <mat-select [value]="languageService.currentLanguage()" (valueChange)="onLanguageChange($event)">
-        @for (language of languageService.supportedLanguages; track language) {
-        <mat-option [value]="language">{{ labels[language] }}</mat-option>
-        }
-    </mat-select>
+  <mat-label>{{ 'nav.language' | translate }}</mat-label>
+  <mat-select [value]="languageService.currentLanguage()" (valueChange)="onLanguageChange($event)">
+    @for (language of languageService.supportedLanguages; track language) {
+      <mat-option [value]="language">{{ labels[language] }}</mat-option>
+    }
+  </mat-select>
 </mat-form-field>
