@@ -56,7 +56,7 @@ jobs:
           npm run test:ci
 
       - name: Build for GitHub Pages
-        run: npm run build -- --configuration production --base-href "/${{ github.event.repository.name }}/"
+        run: npm run build -- --configuration production --base-href "/"
         env:
           FORUM_FIREBASE_API_KEY: ${{ secrets.FORUM_FIREBASE_API_KEY }}
           FORUM_FIREBASE_AUTH_DOMAIN: ${{ secrets.FORUM_FIREBASE_AUTH_DOMAIN }}
