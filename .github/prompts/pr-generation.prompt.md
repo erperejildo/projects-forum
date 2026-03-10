@@ -6,7 +6,7 @@ model: GPT-4.1 (copilot)
 # PR Command Automation Prompt
 
 First, run npm run format to prettier all files.
-Then, execute the following workflow using Gitlab's MCP:
+Then, execute the following workflow using Github's MCP:
 
 1. Create a new branch with a simple, descriptive name related to the uncommitted changes and check it out.
 2. Add all changed files.
@@ -22,4 +22,4 @@ Then, execute the following workflow using Gitlab's MCP:
 9. Show closed PR link
 
 This workflow ensures consistent, clear, and traceable contributions.
-Don't ask for gitlab repo (owner/repo) or branch name, just generate them based on the changes and project context.
+Don't ask for github repo (owner/repo) or branch name, just generate them based on the changes and project context.
