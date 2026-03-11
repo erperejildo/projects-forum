@@ -151,6 +151,9 @@ npm start
 firebase deploy --only firestore
 ```
 
+Admin moderation is allowed for users with either the `admin` custom claim or the verified email configured as `FORUM_ADMIN_EMAIL`.
+If you change that admin email, keep [firestore.rules](./firestore.rules) in sync and redeploy Firestore rules.
+
 3. (Recommended) Create `projects` collection in Firestore with docs like:
 
 - `core-platform` -> `{ "name": "Core Platform" }`

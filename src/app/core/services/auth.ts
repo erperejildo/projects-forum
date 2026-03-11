@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  onAuthStateChanged,
+  onIdTokenChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -26,8 +26,7 @@ export class Auth {
       return '';
     }
 
-    // For the designated admin account (from environment), show a generic "Admin" label
-    if (currentUser.email === environment.forum.adminEmail) {
+    if (this.isAdmin()) {
       return 'Admin';
     }
 
@@ -40,16 +39,28 @@ export class Auth {
       return;
     }
 
-    onAuthStateChanged(firebaseAuth, (user) => {
+    onIdTokenChanged(firebaseAuth, (user) => {
       this.user.set(user);
       if (user) {
         getIdTokenResult(user)
           .then((result) => {
-            const hasClaim = Boolean((result.claims as Record<string, unknown>)['admin']);
-            const byEmail = user.email === environment.forum.adminEmail;
-            this.isAdmin.set(hasClaim || byEmail);
+            const claims = result.claims as Record<string, unknown>;
+            const hasClaim = claims['admin'] === true;
+            const email = typeof claims['email'] === 'string' ? claims['email'] : user.email;
+            const emailVerified =
+              typeof claims['email_verified'] === 'boolean'
+                ? claims['email_verified']
+                : user.emailVerified;
+
+            this.isAdmin.set(
+              hasClaim || (email === environment.forum.adminEmail && emailVerified === true),
+            );
           })
-          .catch(() => this.isAdmin.set(user.email === environment.forum.adminEmail));
+          .catch(() =>
+            this.isAdmin.set(
+              user.email === environment.forum.adminEmail && user.emailVerified === true,
+            ),
+          );
       } else {
         this.isAdmin.set(false);
       }

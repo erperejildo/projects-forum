@@ -147,10 +147,20 @@ export class AuthPanel {
   }
 
   private toReadableError(error: unknown): string {
-    if (error instanceof Error) {
-      return error.message;
+    // Firebase error messages can be Error or FirebaseError
+    if (error && typeof error === 'object') {
+      // Check for Firebase error code
+      const code = (error as any).code || (error as any).message;
+      if (typeof code === 'string') {
+        if (code.includes('auth/invalid-credential')) {
+          return 'Incorrect email or password. Please try again.';
+        }
+      }
+      // Fallback to error.message if present
+      if ((error as any).message) {
+        return (error as any).message;
+      }
     }
-
     return 'Unexpected authentication error';
   }
 }

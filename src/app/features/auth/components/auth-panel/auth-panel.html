@@ -66,7 +66,7 @@
               <span>{{ 'auth.passwordRequired' | translate }}</span>
             }
             @if (form.controls.password.errors?.['minlength']) {
-              <span>{{ 'auth.passwordMinLength' | translate }}</span>
+              <span>Password must be at least 6 characters</span>
             }
           </mat-error>
         }
@@ -104,16 +104,6 @@
 
       <div class="form-actions">
         <button
-          mat-stroked-button
-          class="btn-style2"
-          type="button"
-          [disabled]="loading()"
-          (click)="continueWithGoogle()"
-        >
-          {{ 'auth.continueWithGoogle' | translate }}
-        </button>
-
-        <button
           mat-flat-button
           color="primary"
           class="btn-style1"
@@ -121,6 +111,15 @@
           [disabled]="loading()"
         >
           {{ (mode() === 'sign-in' ? 'auth.signIn' : 'auth.register') | translate }}
+        </button>
+        <button
+          mat-stroked-button
+          class="btn-style2 google-btn"
+          type="button"
+          [disabled]="loading()"
+          (click)="continueWithGoogle()"
+        >
+          {{ 'auth.continueWithGoogle' | translate }}
         </button>
       </div>
     </form>
