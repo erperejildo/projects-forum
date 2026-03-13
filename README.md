@@ -1,6 +1,6 @@
 # Apps Forum
 
-`apps-forum` is a reusable, mobile-responsive forum platform built with Angular + Firebase.
+`projects-forum` is a reusable, mobile-responsive forum platform built with Angular + Firebase.
 
 It is designed for product/project communities where users can ask questions, report issues, and share feedback.
 
