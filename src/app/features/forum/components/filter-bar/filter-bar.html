@@ -24,6 +24,9 @@
   <mat-form-field appearance="outline">
     <mat-label>{{ 'filters.tag' | translate }}</mat-label>
     <mat-select [value]="selectedTag()" (selectionChange)="onTagChange($event.value)">
+      <mat-select-trigger>
+        {{ selectedTag() || ('filters.allTags' | translate) }}
+      </mat-select-trigger>
       <mat-option value="">{{ 'filters.allTags' | translate }}</mat-option>
       @for (tag of tags(); track tag) {
         <mat-option [value]="tag">{{ tag }}</mat-option>
@@ -34,6 +37,15 @@
   <mat-form-field appearance="outline">
     <mat-label>{{ 'filters.order' | translate }}</mat-label>
     <mat-select [value]="order()" (selectionChange)="onOrderChange($event.value)">
+      <mat-select-trigger>
+        {{
+          order() === 'popularity'
+            ? ('filters.orderPopularity' | translate)
+            : order() === 'likes'
+              ? ('filters.orderLikes' | translate)
+              : ('filters.orderDate' | translate)
+        }}
+      </mat-select-trigger>
       <mat-option value="date">{{ 'filters.orderDate' | translate }}</mat-option>
       <mat-option value="popularity">{{ 'filters.orderPopularity' | translate }}</mat-option>
       <mat-option value="likes">{{ 'filters.orderLikes' | translate }}</mat-option>

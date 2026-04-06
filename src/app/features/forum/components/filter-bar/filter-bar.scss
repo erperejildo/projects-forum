@@ -21,7 +21,9 @@
 
   .mat-mdc-form-field .mdc-floating-label,
   .mat-mdc-form-field .mat-mdc-select-value,
-  .mat-mdc-form-field .mat-mdc-input-element {
+  .mat-mdc-form-field .mat-mdc-input-element,
+  .mat-mdc-form-field .mat-mdc-select-trigger,
+  .mat-mdc-form-field .mdc-select__selected-text {
     color: var(--text-main) !important;
   }
 
