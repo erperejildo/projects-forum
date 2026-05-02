@@ -3,7 +3,8 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "schematicCollections": ["angular-eslint"]
+    "schematicCollections": ["angular-eslint"],
+    "analytics": "b417088a-4427-47dd-98ed-ed619d3c9526"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -34,18 +35,6 @@
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "800kB",
-                  "maximumError": "1.2MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
-              ],
               "outputHashing": "all"
             },
             "development": {
