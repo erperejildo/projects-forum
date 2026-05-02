@@ -1,7 +1,7 @@
 {
   "homepage": "https://drodriguez-support.com",
   "name": "projects-forum",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "prepare:env": "node scripts/generate-environment.mjs",
