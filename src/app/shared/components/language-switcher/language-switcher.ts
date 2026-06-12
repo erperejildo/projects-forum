@@ -19,6 +19,7 @@ export class LanguageSwitcher {
     pt: 'Português',
     fr: 'Français',
     nl: 'Nederlands',
+    pl: 'Polski',
   };
 
   readonly languageService = inject(Language);

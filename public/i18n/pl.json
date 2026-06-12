@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "subtitle": "Społecznościowe wsparcie dla Twoich aplikacji",
+    "home": "Strona główna",
+    "createPost": "Utwórz post",
+    "language": "Język",
+    "account": "Konto"
+  },
+  "auth": {
+    "signIn": "Zaloguj się",
+    "signOut": "Wyloguj się",
+    "register": "Zarejestruj się",
+    "email": "E-mail",
+    "password": "Hasło",
+    "continueWithGoogle": "Kontynuuj z Google",
+    "emailRequired": "E-mail jest wymagany",
+    "emailInvalid": "Wprowadź poprawny adres e-mail",
+    "passwordRequired": "Hasło jest wymagane",
+    "passwordMinLength": "Hasło musi mieć co najmniej {{min}} znaków",
+    "confirmPassword": "Potwierdź hasło",
+    "passwordsMismatch": "Hasła nie są zgodne"
+  },
+  "common": {
+    "close": "Zamknij",
+    "add": "Dodaj",
+    "cancel": "Anuluj",
+    "edit": "Edytuj",
+    "delete": "Usuń",
+    "save": "Zapisz",
+    "loading": "Ładowanie..."
+  },
+  "home": {
+    "title": "Pytania i opinie w jednym miejscu",
+    "subtitle": "Przeglądaj problemy, zadawaj pytania i pomagaj innym w ramach swoich projektów.",
+    "askButton": "Poproś o pomoc",
+    "fallbackProjectsNotice": "Używana jest lista projektów z lokalnej konfiguracji, dopóki projekty Firestore nie będą dostępne.",
+    "noPosts": "Brak postów pasujących do bieżących filtrów."
+  },
+  "filters": {
+    "search": "Szukaj",
+    "searchPlaceholder": "Szukaj według tekstu lub autora",
+    "project": "Projekt",
+    "allProjects": "Wszystkie projekty",
+    "tag": "Popularne tagi",
+    "allTags": "Wszystkie tagi",
+    "order": "Kolejność",
+    "orderDate": "Najnowsze",
+    "orderPopularity": "Najpopularniejsze",
+    "orderLikes": "Najbardziej lubiane"
+  },
+  "post": {
+    "question": "Pytanie",
+    "issue": "Problem",
+    "likes": "polubień",
+    "replies": "odpowiedzi",
+    "unlike": "Cofnij polubienie",
+    "liked": "Polubiono",
+    "subscribe": "Subskrybuj",
+    "unsubscribe": "Anuluj subskrypcję",
+    "by": "Autor",
+    "noReplies": "Brak odpowiedzi.",
+    "replyPlaceholder": "Napisz swoją odpowiedź",
+    "addReply": "Dodaj odpowiedź",
+    "editPost": "Edytuj post",
+    "deletePost": "Usuń post",
+    "editReply": "Edytuj odpowiedź",
+    "deleteReply": "Usuń odpowiedź",
+    "confirmDeletePost": "Czy na pewno chcesz usunąć ten post?",
+    "confirmDeleteReply": "Czy na pewno chcesz usunąć tę odpowiedź?",
+    "replyRequiresAuth": "Zaloguj się, aby odpowiedzieć.",
+    "replyRequired": "Odpowiedź nie może być pusta",
+    "notFound": "Nie można znaleźć tego posta."
+  },
+  "create": {
+    "title": "Utwórz nowy post",
+    "subtitle": "Wybierz projekt, zdefiniuj typ posta i podaj szczegóły.",
+    "project": "Projekt",
+    "type": "Typ posta",
+    "message": "Wiadomość",
+    "messagePlaceholder": "Opisz swoje pytanie lub problem",
+    "tags": "Tagi",
+    "tagsPlaceholder": "Dodaj tag i naciśnij Enter",
+    "messageRequired": "Wiadomość jest wymagana",
+    "messageMinLength": "Wiadomość musi mieć co najmniej {{min}} znaków",
+    "submit": "Opublikuj post"
+  }
+}

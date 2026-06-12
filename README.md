@@ -25,6 +25,8 @@ leverages Firebase Auth and Firestore to power core forum behavior and is struct
   - Italian
   - Portuguese
   - French
+  - Nederlands
+  - Polish
 
 ## What This Project Does
 
@@ -52,6 +54,7 @@ leverages Firebase Auth and Firestore to power core forum behavior and is struct
   - Portuguese
   - French
   - Nederlands
+  - Polish
 
 ## Tech Stack
 

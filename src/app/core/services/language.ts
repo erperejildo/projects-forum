@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class Language {
-  readonly supportedLanguages = ['en', 'es', 'de', 'it', 'pt', 'fr'] as const;
+  readonly supportedLanguages = ['en', 'es', 'de', 'it', 'pt', 'fr', 'nl', 'pl'] as const;
   readonly currentLanguage = signal<(typeof this.supportedLanguages)[number]>('en');
   private readonly translate = inject(TranslateService);
 

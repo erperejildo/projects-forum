@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "subtitle": "Community-ondersteuning voor je apps",
+    "home": "Home",
+    "createPost": "Bericht aanmaken",
+    "language": "Taal",
+    "account": "Account"
+  },
+  "auth": {
+    "signIn": "Inloggen",
+    "signOut": "Uitloggen",
+    "register": "Registreren",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "continueWithGoogle": "Doorgaan met Google",
+    "emailRequired": "E-mail is verplicht",
+    "emailInvalid": "Voer een geldig e-mailadres in",
+    "passwordRequired": "Wachtwoord is verplicht",
+    "passwordMinLength": "Wachtwoord moet minimaal {{min}} tekens bevatten",
+    "confirmPassword": "Wachtwoord bevestigen",
+    "passwordsMismatch": "Wachtwoorden komen niet overeen"
+  },
+  "common": {
+    "close": "Sluiten",
+    "add": "Toevoegen",
+    "cancel": "Annuleren",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "save": "Opslaan",
+    "loading": "Laden..."
+  },
+  "home": {
+    "title": "Vragen en feedback op één plek",
+    "subtitle": "Blader door problemen, stel vragen en help anderen bij je projecten.",
+    "askButton": "Om hulp vragen",
+    "fallbackProjectsNotice": "Lijst met projecten uit lokale configuratie wordt gebruikt totdat Firestore-projecten beschikbaar zijn.",
+    "noPosts": "Geen berichten komen overeen met je huidige filters."
+  },
+  "filters": {
+    "search": "Zoeken",
+    "searchPlaceholder": "Zoeken op tekst of auteur",
+    "project": "Project",
+    "allProjects": "Alle projecten",
+    "tag": "Populaire tags",
+    "allTags": "Alle tags",
+    "order": "Volgorde",
+    "orderDate": "Nieuwste",
+    "orderPopularity": "Meest populair",
+    "orderLikes": "Meest geliked"
+  },
+  "post": {
+    "question": "Vraag",
+    "issue": "Probleem",
+    "likes": "likes",
+    "replies": "reacties",
+    "unlike": "Niet meer leuk vinden",
+    "liked": "Leuk gevonden",
+    "subscribe": "Abonneren",
+    "unsubscribe": "Afmelden",
+    "by": "Door",
+    "noReplies": "Nog geen reacties.",
+    "replyPlaceholder": "Schrijf je reactie",
+    "addReply": "Reactie toevoegen",
+    "editPost": "Bericht bewerken",
+    "deletePost": "Bericht verwijderen",
+    "editReply": "Reactie bewerken",
+    "deleteReply": "Reactie verwijderen",
+    "confirmDeletePost": "Weet je zeker dat je dit bericht wilt verwijderen?",
+    "confirmDeleteReply": "Weet je zeker dat je deze reactie wilt verwijderen?",
+    "replyRequiresAuth": "Log in om te reageren.",
+    "replyRequired": "Reactie mag niet leeg zijn",
+    "notFound": "Dit bericht kon niet worden gevonden."
+  },
+  "create": {
+    "title": "Nieuw bericht aanmaken",
+    "subtitle": "Kies een project, definieer het berichttype en geef details.",
+    "project": "Project",
+    "type": "Berichttype",
+    "message": "Bericht",
+    "messagePlaceholder": "Beschrijf je vraag of probleem",
+    "tags": "Tags",
+    "tagsPlaceholder": "Voeg een tag toe en druk op Enter",
+    "messageRequired": "Bericht is verplicht",
+    "messageMinLength": "Bericht moet minimaal {{min}} tekens bevatten",
+    "submit": "Bericht publiceren"
+  }
+}
