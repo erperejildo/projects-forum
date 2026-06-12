@@ -51,6 +51,7 @@ leverages Firebase Auth and Firestore to power core forum behavior and is struct
   - Italian
   - Portuguese
   - French
+  - Nederlands
 
 ## Tech Stack
 
