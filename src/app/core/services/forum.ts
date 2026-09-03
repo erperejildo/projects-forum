@@ -211,6 +211,14 @@ export class Forum {
       });
     });
 
+    if (input.type === 'question') {
+      try {
+        await this.enqueueNewQuestionEmail(input, postRef.id);
+      } catch {
+        // Email queueing is optional and should never block post creation.
+      }
+    }
+
     return postRef.id;
   }
 
@@ -585,6 +593,57 @@ export class Forum {
     }
 
     return this.db;
+  }
+
+  private async enqueueNewQuestionEmail(
+    input: {
+      message: string;
+      projectId: string;
+      tags: string[];
+      type: PostType;
+      user: User;
+    },
+    postId: string,
+  ): Promise<void> {
+    if (!this.db || !environment.forum.mailCollection) {
+      return;
+    }
+
+    const adminEmail = (environment.forum.adminEmail || 'drodriguez.apps@gmail.com').trim();
+    if (!adminEmail) {
+      return;
+    }
+
+    // Don't notify admin about their own questions.
+    if (input.user.email && input.user.email.toLowerCase() === adminEmail.toLowerCase()) {
+      return;
+    }
+
+    const senderName = this.auth.isAdmin()
+      ? 'Admin'
+      : input.user.displayName || input.user.email || 'User';
+
+    const tagsLabel = input.tags.length ? input.tags.join(', ') : 'none';
+    const truncatedMessage =
+      input.message.length > 2000 ? `${input.message.slice(0, 2000)}…` : input.message;
+
+    await addDoc(collection(this.db, environment.forum.mailCollection), {
+      to: [adminEmail],
+      message: {
+        subject: `[Forum] New question in ${input.projectId} - ${senderName}`,
+        text: `${senderName} posted a new question in ${input.projectId}:\n\n${truncatedMessage}\n\nTags: ${tagsLabel}\nType: ${input.type}\nPost ID: ${postId}`,
+        html: `<p><strong>${this.escapeHtml(senderName)}</strong> posted a new question in <strong>${this.escapeHtml(input.projectId)}</strong>.</p><p>${this.escapeHtml(truncatedMessage).replace(/\n/g, '<br>')}</p><p>Tags: ${this.escapeHtml(tagsLabel)}<br>Type: ${this.escapeHtml(input.type)}<br>Post ID: ${this.escapeHtml(postId)}</p>`,
+      },
+    });
+  }
+
+  private escapeHtml(value: string): string {
+    return value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   private async enqueueReplyEmails(postId: string, replyText: string, actor: User): Promise<void> {

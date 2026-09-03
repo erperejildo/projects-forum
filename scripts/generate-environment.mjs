@@ -35,7 +35,7 @@ const firebase = {
 const forum = {
   defaultProject: getValue('FORUM_DEFAULT_PROJECT', 'Core Platform'),
   projects: parseProjectList(),
-  adminEmail: getValue('FORUM_ADMIN_EMAIL', 'admin@example.com'),
+  adminEmail: getValue('FORUM_ADMIN_EMAIL', 'drodriguez.apps@gmail.com'),
   mailCollection: getValue('FORUM_MAIL_COLLECTION', 'mail'),
 };
 

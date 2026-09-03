@@ -232,6 +232,20 @@ service cloud.firestore {
              );
     }
 
+    function validMailCreate() {
+      return request.resource.data.keys().hasAll(['to', 'message']) &&
+             request.resource.data.to is list &&
+             request.resource.data.to.size() >= 1 &&
+             request.resource.data.to.size() <= 10 &&
+             request.resource.data.message is map &&
+             request.resource.data.message.keys().hasAll(['subject', 'text', 'html']) &&
+             request.resource.data.message.subject is string &&
+             request.resource.data.message.subject.size() >= 1 &&
+             request.resource.data.message.subject.size() <= 998 &&
+             request.resource.data.message.text is string &&
+             request.resource.data.message.html is string;
+    }
+
     match /projects/{projectId} {
       allow read: if true;
       allow write: if false;
@@ -288,6 +302,12 @@ service cloud.firestore {
                       );
         allow delete: if false;
       }
+    }
+
+    match /mail/{mailId} {
+      allow read: if isAdmin();
+      allow create: if isSignedIn() && validMailCreate();
+      allow update, delete: if false;
     }
   }
 }
