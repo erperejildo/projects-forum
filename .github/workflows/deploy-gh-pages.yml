@@ -56,7 +56,10 @@ jobs:
           npm run test:ci
 
       - name: Build for GitHub Pages
-        run: npm run build -- --configuration production --base-href "/"
+        run: |
+          npm run prepare:env
+          npx ng build --configuration production --base-href "/"
+          node scripts/copy-404.mjs
         env:
           FORUM_FIREBASE_API_KEY: ${{ secrets.FORUM_FIREBASE_API_KEY }}
           FORUM_FIREBASE_AUTH_DOMAIN: ${{ secrets.FORUM_FIREBASE_AUTH_DOMAIN }}
@@ -72,6 +75,11 @@ jobs:
 
       - name: Copy CNAME for custom domain
         run: cp CNAME dist/forum-app/browser/
+
+      - name: Create SPA fallback for GitHub Pages (redundant safety net)
+        run: |
+          cp dist/forum-app/browser/index.html dist/forum-app/browser/404.html
+          touch dist/forum-app/browser/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

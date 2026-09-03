@@ -6,7 +6,7 @@
     "ng": "ng",
     "prepare:env": "node scripts/generate-environment.mjs",
     "start": "npm run prepare:env && ng serve",
-    "build": "npm run prepare:env && ng build",
+    "build": "npm run prepare:env && ng build && node scripts/copy-404.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "npm run prepare:env && ng test",
     "test:ci": "npm run prepare:env && ng test --watch=false",
