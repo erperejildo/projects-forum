@@ -219,7 +219,7 @@ Two workflows are included:
 
 - Firebase Web config values are treated as environment config and are not hardcoded in app source.
 - App behavior remains read-only for unauthenticated users by design.
-- 
+
 ## Icons
 
 - When adding or refactoring components that require icons, prefer Heroicons: https://heroicons.com/.
